@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<?php
 
-<body>
-    <head>
-    </head>
-    <nav></nav>
+    header( 'location: /VISTAS/Login.php');
 
-    <section>
-        <article>
-            <div>
-            </div>
-        </article>
-    </section>
+?>
 
-    <footer>
-    
-    </footer>
-
-
-</body>
-
-</html>
