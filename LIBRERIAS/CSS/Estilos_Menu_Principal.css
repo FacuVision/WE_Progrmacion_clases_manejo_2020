@@ -1,0 +1,67 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+h1{
+    text-align: center;
+    margin: 100px auto;
+}
+
+
+.agrupacion{
+        text-align: center;
+        margin : 180px auto 0px auto;
+        background : rgb(229,229,229);
+}
+    .container {
+        margin: 50px 50px ;
+        display : inline-block;
+        position: relative;
+        width: 15%;
+        height :auto;
+    }
+
+    .image {
+        display: block;
+        width: 105%;
+        height: auto;
+}
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: brown;
+        border-radius:  10px;
+    }
+
+    .container:hover .overlay {
+        opacity: 1;
+    }
+
+    .text {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    h5{
+        color:brown;
+        text-align: center;
+        margin-top: 50px;
+    }
+    

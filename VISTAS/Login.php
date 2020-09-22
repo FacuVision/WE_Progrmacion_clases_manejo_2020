@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V6</title>
+	<title>Login Administrador</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -28,56 +28,61 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+<form  method="get" action="../CONTROLADORES/SesionesControlador.php">
+
+	<input type=hidden value="1" name="op">
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
-				<form class="form">
+				<form class="form" method="post">
 					<span class="login100-form-title p-b-70">
-						Welcome
+						Bienvenido
 					</span>
+					
 					<span class="login100-form-avatar">
-						<img src="../LIBRERIAS/images/avatar-01.jpg" alt="AVATAR">
+						<img src="../LIBRERIAS/images/avatar-01.png" alt="AVATAR">
 					</span>
-
-					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-						<input class="input100" type="text" name="username">
-						<span class="focus-input100" data-placeholder="Username"></span>
+<!-- ZONA DE LOGIN  --------------------------------------------------------------------------------->
+					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Ingresa correo">
+						<input class="input100" type="email" required  autocomplete="off" name="correo">
+						<span class="focus-input100" data-placeholder="Correo"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100" data-placeholder="Password"></span>
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Ingresa contraseña">
+						<input class="input100" type="password"  required  autocomplete="off"name="pass">
+						<span class="focus-input100" data-placeholder="Contraseña"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
+						<input  type="submit" class="login100-form-btn" value="login">
+							<div style="margin-top:50px">
+								Fecha: <?php echo date('d-m-yy')?>
+							</div>
 					</div>
 
-					<ul class="login-more p-t-190">
-						<li class="m-b-8">
-							<span class="txt1">
-								Forgot
-							</span>
+						<ul class="login-more p-t-190">
+							<li class="m-b-8">
+								<span class="txt1">
+									
+								</span>
 
-							<a href="#" class="txt2">
-								Username / Password?
-							</a>
-						</li>
+								<a href="#" class="txt2">
+									
+								</a>
+							</li>
 
-						<li>
-							<span class="txt1">
-								Don’t have an account?
-							</span>
+							<li>
+								<span class="txt1">
+								
+								</span>
 
-							<a href="#" class="txt2">
-								Sign up
-							</a>
-						</li>
-					</ul>
-				</form>
+								<a href="#" class="txt2">
+									
+								</a>
+							</li>
+						</ul>
+				
 			</div>
 		</div>
 	</div>
@@ -101,6 +106,6 @@
 	<script src="../vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="../LIBRERIAS/js/main.js"></script>
-
+</form>
 </body>
 </html>
