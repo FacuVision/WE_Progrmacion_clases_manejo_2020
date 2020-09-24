@@ -22,15 +22,23 @@ class AdministradorDAO {
 
         if($verificar>0){      
             session_start();
-            var_dump($lista);
             $_SESSION['id_administrador'] = $lista[0]['id_administrador'];
             $_SESSION['nombre'] = $lista[0]['admin_nombre'];
 
-            return true;
+            $fechas = array("dia"=>1,"mes"=>2,"año"=>3);
+            $id_fechas = array("id_dia"=>1,"id_mes"=>2,"id_agno"=>3,"id_clase_manejo"=>4,"id_detalle_clase_manejo"=>5);
+
+            $_SESSION['fechas']= $fechas;
+            $_SESSION['id_fechas']= $id_fechas; 
         }
         
         $instanciacompartida->setArray(null);
         
+        return true;
     }
+
+
+
+    
 }
 

@@ -1,11 +1,9 @@
 <?php
 session_start();
-
-    if (!empty($_SESSION['nombre'])) 
+    if (!empty($_SESSION['lista_agnos'])) 
     {
-        $nombreUsuario = $_SESSION['nombre']; 
         $lista_agnos = $_SESSION['lista_agnos'];   
-    }else{
+    } else{
         echo '<script> document.location.href="Login.php";</script>';  
     }
 ?>
@@ -19,7 +17,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Años</title>
     <?php include('../VISTAS/TEMPLATES/ImportacionesCabecera.php'); ?>
-    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilos_agnos.css">
+    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilos_agno.css">
 
 </head>
 
@@ -47,14 +45,11 @@ session_start();
                         </tr>
                     </thead>
                     <tbody>
-                    <?php 
-                    if(!empty($lista_agnos)){
-
-                    foreach ($lista_agnos as $indice): ?>
+                    <?php foreach ($lista_agnos as $indice): ?>
                         <tr>
                             <td style="text-align:center;">
-                                <a name="eligio_agno" class="btn btn-light" 
-                                href="../CONTROLADORES/ProgramacionControlador.php?op=4&id_agno=<?php echo $indice['id_agno'];?>&agno_numero=<?php echo $indice['agno_numero'];?>" >  
+                                <a  class="btn btn-light" 
+                                href="../CONTROLADORES/ProgramacionControlador.php?op=4&id_agno=<?php echo $indice['id_agno'];?>" >  
                                 <?php echo $indice['agno_numero']; ?> 
                                 </a>
                                 
@@ -64,11 +59,7 @@ session_start();
                                 class="btn btn-danger"> Eliminar Año </a>
                             </td>
                         </tr>
-                    <?php endforeach;}
-                    else{
-                        echo "<p> Aun no tienes años registrados </p>";
-                    }
-                    ?>
+                    <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
