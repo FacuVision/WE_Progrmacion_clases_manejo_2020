@@ -27,5 +27,9 @@ class MesBean{
 		return $this->mes_numero;
 	}
 
+	public function setMes_numero($mes_numero){
+		$this->mes_numero = $mes_numero;
+	}
+
 }
 

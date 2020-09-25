@@ -18,7 +18,7 @@ $_SESSION['lista_meses']
 
 
 /*array_de_fechas*/
-$fechas = array("dia"=>1,"mes"=>2,"año"=>3);
+$fechas = array("dia"=>1,"mes"=>2,"año"=>3,"mes_nombre"=>"");
 $id_fechas = array("id_dia"=>1,"id_mes"=>2,"id_agno"=>3,"id_clase_manejo"=>4,"id_detalle_clase_manejo"=>5);
 
 $_SESSION['fechas']= $fechas;

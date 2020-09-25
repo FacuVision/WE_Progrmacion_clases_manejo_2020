@@ -3,6 +3,7 @@ session_start();
     if (!empty($_SESSION['nombre'])) 
     {
         $lista_meses = $_SESSION['lista_meses']; 
+
         $array_meses= array(1 => "Enero", 2 =>  "Febrero", 3 => "Marzo", 4 =>  'Abril',5=> "Mayo", 6=> "Junio", 7 => "Julio", 8 =>"Agosto", 9=>"Septiembre", 10=>"Octubre", 11=>"Noviembre", 12 => "Diciembre" ); 
     } else{
         echo '<script> document.location.href="Login.php";</script>';  
@@ -28,7 +29,7 @@ session_start();
 <body>
     <header>
     <div class="titulo">
-        <h1>Meses</h1>
+        <h1>Meses del <?php echo $_SESSION['fechas']['año']?></h1>
         <h5>Selecciona un mes para realizar la programacion de las clases</h5>
     </div>
     </header>
@@ -52,14 +53,14 @@ session_start();
                     <tbody>
                     
                     <?php
-                        if(empty($lista_meses)){
+                        if(!empty($lista_meses)){
                         $i = 1;
                         foreach ($lista_meses as $indice): 
                     ?>
                         <tr>
                             <td style="text-align:center;">
                                 <a  class="btn btn-light" 
-                                href="../CONTROLADORES/ProgramacionControlador.php?op=6&id_mes=<?php echo $indice['id_mes'];?>" >  
+                                href="../CONTROLADORES/ProgramacionControlador.php?op=7&id_mes=<?php echo $indice['id_mes'];?>&nombre_mes=<?php echo $array_meses[$i];?>&numero_mes=<?php echo $indice['mes_numero']; ?>" >  
                                 
                                 <?php  
                                 if($indice['mes_numero']=="11" || $indice['mes_numero']=="12" || $indice['mes_numero']=="10" ) 
@@ -72,14 +73,13 @@ session_start();
 
 
                             <td style="text-align:center;">
-                                <?php echo $array_meses[$i];  $i++;  ?>
+                                <?php echo $array_meses[$indice['mes_numero']];  $i++?>
                             </td>
-
 
 
                             <td style="text-align:center;">
                                 <a href="../CONTROLADORES/ProgramacionControlador.php?op=5&id_mes=<?php echo $indice['id_mes'];?>"
-                                class="btn btn-danger"> Eliminar Mes </a>
+                                class="btn btn-danger">Eliminar</a>
                             </td>
 
 
@@ -98,9 +98,15 @@ session_start();
             <a class="btn btn-secondary" href="MenuPrincipal.php" > 
                 Volver al Menu
             </a>
+            <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_mes" > 
+            Crear Mes
+            </buttom>
+
+
             <a id="Regresar" href="../CONTROLADORES/ProgramacionControlador.php?op=1" class="btn btn-info">
                 Volver a Años 
             </a>
+
 
 
         </div>
@@ -108,7 +114,7 @@ session_start();
 
     </form>
     <?php include('../VISTAS/TEMPLATES/ImportacionesPie.php'); ?>
-    <?php include('../VISTAS/TEMPLATES/modal_creacion_agnos.php'); ?>
+    <?php include('../VISTAS/TEMPLATES/modal_creacion.php'); ?>
     <script src="../LIBRERIAS/JS/DataTable_agnos.js"></script>
     
 </body>

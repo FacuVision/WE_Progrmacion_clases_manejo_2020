@@ -16,6 +16,8 @@ class MesDAO{
         $lista = $instanciacompartida->obtener_filas($res);
         
         //echo '<pre>' . var_export($lista, true) . '</pre>';
+        $instanciacompartida->setArray(null);
+        
         return $lista;
     }
     
@@ -29,6 +31,19 @@ class MesDAO{
         
         return $estado;
         
+    }
+
+    public function insertar_mes(MesBean $MesBean)
+    {
+        $numero_mes = $MesBean->getMes_numero();
+        $id_agno = $MesBean->getId_año();
+
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "INSERT INTO mes(id_agno,mes_numero) VALUES ($id_agno,'$numero_mes')";
+        //echo $sql;
+        $estado = $instanciacompartida->EjecutarConEstado($sql);
+        
+        return $estado;
     }
 
 }

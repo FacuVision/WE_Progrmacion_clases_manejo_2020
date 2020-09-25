@@ -61,7 +61,7 @@ session_start();
                             </td>
                             <td style="text-align:center;">
                             <a href="../CONTROLADORES/ProgramacionControlador.php?op=3&id_agno=<?php echo $indice['id_agno'];?>"
-                                class="btn btn-danger"> Eliminar Año </a>
+                                class="btn btn-danger">Eliminar</a>
                             </td>
                         </tr>
                     <?php endforeach;}
@@ -81,13 +81,14 @@ session_start();
             <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_agno" > 
             Crear Año 
             </buttom>
+            
             <a id="Regresar" href="MenuPrincipal.php" class="btn btn-info"> Volver al Menu </a>
         </div>
     </footer>
 
     </form>
     <?php include('../VISTAS/TEMPLATES/ImportacionesPie.php'); ?>
-    <?php include('../VISTAS/TEMPLATES/modal_creacion_agnos.php'); ?>
+    <?php include('../VISTAS/TEMPLATES/modal_creacion.php'); ?>
     <script src="../LIBRERIAS/JS/DataTable_agnos.js"></script>
     
 </body>
