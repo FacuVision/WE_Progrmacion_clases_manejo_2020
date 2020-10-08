@@ -1,13 +1,14 @@
 /*CONSULTA PARA GENERAL*/
+SELECT  class.clas_fecha, det.det_horario, cur.cur_nombre, cur.cur_horas, det.det_n_clase, alum.alum_nombre, alum.alum_apellido, emp.emp_nombre, co.coche_tipo 
+,det.det_asistencia
+FROM clases_manejo as class 
+INNER JOIN detalle_clases_manejo as det on det.id_clase_manejo = class.id_clase_manejo
+INNEr JOIN alumnos as alum on alum.id_alumno=det.id_alumno
+INNER JOIN instructores as ins on ins.id_instructor=class.id_instructor
+INNER join coches as co on co.id_coche=det.id_coche
+INNER JOIN cursos as cur on cur.id_curso=det.id_curso
+INNER join empleados as emp on emp.id_empleado=ins.id_empleado
 
-SELECT det.det_horario, clas.clas_fecha, alum.alum_nombre, ins.ins_nombre, co.coche_tipo, det.det_asistencia,  cur.cur_nombre, det.det_hora 
-FROM clase_manejo as clas 
-INNER JOIN detalle_clase_manejo as det on clas.id_clase_manejo=det.id_clase_manejo
-INNER JOIN curso as cur on cur.id_curso = det.id_curso
-INNER join coche as co on co.id_coche = det.id_coche
-INNER JOIN instructor as ins on ins.id_instructor= clas.id_instructor
-inner join alumno as alum on alum.id_alumno= det.id_alumno
-order by det.id_detalle_clase_manejo
 
 
 

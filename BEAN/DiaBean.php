@@ -1,7 +1,7 @@
 <?php 
 
 
-class AdministardorBean{
+class DiaBean{
 
     private $id_dia;
     private $id_mes;
@@ -23,5 +23,13 @@ class AdministardorBean{
 		$this->id_mes = $id_mes;
 	}
 
+
+	public function getDia_numero(){
+		return $this->dia_numero;
+	}
+
+	public function setDia_numero($dia_numero){
+		$this->dia_numero = $dia_numero;
+	}
 }
 
