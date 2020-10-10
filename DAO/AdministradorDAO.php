@@ -11,20 +11,19 @@ class AdministradorDAO {
         $contra = $objAdministradorBean->get_admin_contra();
         
         $instanciacompartida = ConexionBD::getInstance();
-        $sql =  "SELECT * FROM empleados as emp 
-                INNER JOIN administradores as adm on adm.id_empleado=emp.id_empleado
-                WHERE emp.emp_correo='$correo' and  adm.admin_contra='$contra';";
+        $sql =  "SELECT *
+                FROM administrador 
+                WHERE admin_correo='$correo' and admin_contra='$contra';";
 
         $res = $instanciacompartida->ejecutar($sql);
         $lista = $instanciacompartida->obtener_filas($res);
 
-        //var_export($lista);
         $verificar = mysqli_affected_rows($instanciacompartida->getLink());
 
         if($verificar>0){      
             session_start();
             $_SESSION['id_administrador'] = $lista[0]['id_administrador'];
-            $_SESSION['nombre'] = $lista[0]['emp_nombre'];
+            $_SESSION['nombre'] = $lista[0]['admin_nombre'];
 
             $fechas = array("dia"=>1,"mes"=>2,"año"=>3,"mes_nombre"=>"");
             $id_fechas = array("id_dia"=>1,"id_mes"=>2,"id_agno"=>3,"id_clase_manejo"=>4,"id_detalle_clase_manejo"=>5);
