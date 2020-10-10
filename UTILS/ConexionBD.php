@@ -7,7 +7,7 @@ class ConexionBD {
     private $servidor = 'localhost';
     private $usuario = 'root';
     private $password = '';
-    private $base_datos = 'escuelamanejo';
+    private $base_datos = 'bdescuelamanejo';
     private $link;                  //VARIABLE PARA LA CONEXION
     public $res;                    //EL RESULTET QUE NOS DEVUELVE EL MYSQLI_QUERY
     static $_instance;            //INSTANCIA COMPARTIDA DE LA CLASE ConexionBD

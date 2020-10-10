@@ -8,8 +8,8 @@ class MesDAO{
     public function listarMeses_segun_agno($id_agno){
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "SELECT * FROM meses as mes 
-                INNER JOIN agnos as agno on agno.id_agno=mes.id_agno
+        $sql = "SELECT * FROM mes as mes 
+                INNER JOIN agno as agno on agno.id_agno=mes.id_agno
                 where agno.id_agno=$id_agno";
         //echo $sql;        
         $res = $instanciacompartida->ejecutar($sql);
@@ -26,7 +26,7 @@ class MesDAO{
         $id_mes = $MesBean->getId_mes();
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "DELETE FROM meses WHERE id_mes=$id_mes";
+        $sql = "DELETE FROM mes WHERE id_mes=$id_mes";
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         
         return $estado;
@@ -39,7 +39,7 @@ class MesDAO{
         $id_agno = $MesBean->getId_año();
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "INSERT INTO meses(id_agno,mes_numero) VALUES ($id_agno,'$numero_mes')";
+        $sql = "INSERT INTO mes(id_agno,mes_numero) VALUES ($id_agno,'$numero_mes')";
         //echo $sql;
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         
