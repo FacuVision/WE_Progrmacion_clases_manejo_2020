@@ -8,7 +8,7 @@ class ClaseManejoDAO{
     public function listarAgnos(){
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "SELECT * FROM agno";
+        $sql = "SELECT * FROM agnos";
         $res = $instanciacompartida->ejecutar($sql);
         $lista = $instanciacompartida->obtener_filas($res);
         

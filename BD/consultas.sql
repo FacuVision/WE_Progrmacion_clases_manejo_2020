@@ -15,3 +15,9 @@ order by det.id_detalle_clase_manejo
 /*SELECCION DE LAS FECHAS*/
 SELECT * FROM dia as dia INNER JOIN mes as mes on mes.id_mes=dia.id_mes
 INNER JOIN agno as an on an.id_agno=mes.id_mes
+
+
+/*SELECCION DE CUENTA ADMINISTRADOR*/
+SELECT * FROM empleados as emp 
+INNER JOIN administradores as adm on adm.id_empleado=emp.id_empleado
+WHERE emp.emp_correo='olenka@gmail.com' and  adm.admin_contra='olenka@gmail.com';
