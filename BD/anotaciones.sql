@@ -23,3 +23,9 @@ $id_fechas = array("id_dia"=>1,"id_mes"=>2,"id_agno"=>3,"id_clase_manejo"=>4,"id
 
 $_SESSION['fechas']= $fechas;
 $_SESSION['id_fechas']= $id_fechas;
+
+
+/*
+Lista de Clases segun dia
+$_SESSION['listaClases']
+*/

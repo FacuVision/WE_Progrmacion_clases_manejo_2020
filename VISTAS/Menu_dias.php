@@ -4,6 +4,7 @@ session_start();
     {
         $lista_dias = $_SESSION['lista_dias'];   
         $nombre_mes = $_SESSION['fechas']["mes_nombre"];
+        $numero_mes = $_SESSION['fechas']['mes'];
         $numero_agno = $_SESSION['fechas']["año"];
     } else{
         echo '<script> document.location.href="Login.php";</script>';  
@@ -55,7 +56,7 @@ session_start();
                         <tr>
                             <td style="text-align:center;">
                                 <a  class="btn btn-light" 
-                                href="" >  
+                                href="../CONTROLADORES/ProgramacionControlador.php?op=11&numero_dia=<?php echo $indice["dia_numero"];?>&id_dia=<?php echo $indice["id_dia"];?>" >  
                                 
                                 <?php  
                                 if($indice['dia_numero']>10) 
@@ -66,7 +67,7 @@ session_start();
                             </td>
 
                             <td style="text-align:center;">
-                                <a href=""
+                                <a href="../CONTROLADORES/ProgramacionControlador.php?op=10&id_dia=<?php echo $indice['id_dia'];?>"
                                 class="btn btn-danger">Eliminar</a>
                             </td>
                         </tr>

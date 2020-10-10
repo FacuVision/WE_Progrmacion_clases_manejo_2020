@@ -1,4 +1,7 @@
 <?php
+require_once "../UTILS/ConexionBD.php";
+require_once "../BEAN/DiaBean.php";
+require_once "../BEAN/MesBean.php";
 
 class DiaDAO{
 
@@ -17,4 +20,33 @@ class DiaDAO{
         
         return $lista;
     }
+
+
+
+    public function InsertarDia(DiaBean $DiaBean, MesBean $MesBean)
+    {
+        $dia_numero = $DiaBean->getDia_numero();
+        $id_mes = $MesBean->getId_mes();
+
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "INSERT INTO dias(id_mes, dia_numero) 
+                VALUES ($id_mes,'$dia_numero')";
+        //echo $sql;        
+        $estado = $instanciacompartida->EjecutarConEstado($sql);
+        return $estado;
+    }
+
+
+    public function eliminar_dia(DiaBean $DiaBean){
+
+        $id_dia = $DiaBean->getId_dia();
+
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "DELETE FROM dias WHERE id_dia=$id_dia";
+        $estado = $instanciacompartida->EjecutarConEstado($sql);
+        //echo $sql;
+        return $estado;
+        
+    }
+
 }

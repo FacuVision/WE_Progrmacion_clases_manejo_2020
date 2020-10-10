@@ -39,9 +39,6 @@
 
 
 
-
-
-
 <!-- Modal CREACION DE MES-->
 <form method="post" action="../CONTROLADORES/ProgramacionControlador.php?op=8">
 
@@ -90,6 +87,56 @@
     </form>
 
 
+
+<?php  
+if(isset($numero_mes)){
+        if($numero_mes<10)$numero_mes= "0". $numero_mes;
+}
+
+if(isset($indice['dia_numero'])){
+    $dia_numero= intval($indice['dia_numero']) + 1;
+    if($dia_numero<10) $dia_numero= "0".$dia_numero;
+}
+
+if(empty($indice['dia_numero'])) $dia_numero = "01";
+
+?>
+
+<!-- Modal CREACION DE DIAS-->
+<form method="post" action="../CONTROLADORES/ProgramacionControlador.php?op=9">
+
+    <!-- Modal -->
+    <div class="modal fade" id="crear_dias" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Crear mes </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Seleccione Dia</label>
+                    <input name="dia" type="date" class="form-control" value="<?php echo $numero_agno ."-". $numero_mes."-".$dia_numero?>" min="<?php echo $numero_agno."-". $numero_mes;?>-01" >
+                </div>
+
+
+                <div class="form-group" style="color:brown">
+                    <label for="message-text" class="col-form-label">
+                    Recuerda que no puedes ingresar dias fuera del mes donde te encuentres</label>
+                </div>
+        </div>
+                <div class="modal-footer">
+                    <input value="Insertar" type="submit" class="btn btn-success">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
 
 
 
