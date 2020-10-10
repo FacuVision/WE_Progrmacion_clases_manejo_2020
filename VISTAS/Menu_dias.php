@@ -4,11 +4,7 @@ session_start();
     {
         $lista_dias = $_SESSION['lista_dias'];   
         $nombre_mes = $_SESSION['fechas']["mes_nombre"];
-        $numero_mes = $_SESSION['fechas']['mes'];
         $numero_agno = $_SESSION['fechas']["año"];
-
-        //echo '<pre>' . var_export($lista_dias, true) . '</pre>';
-
     } else{
         echo '<script> document.location.href="Login.php";</script>';  
     }
@@ -59,10 +55,10 @@ session_start();
                         <tr>
                             <td style="text-align:center;">
                                 <a  class="btn btn-light" 
-                                href="../CONTROLADORES/ProgramacionControlador.php?op=11&numero_dia=<?php echo $indice["dia_numero"];?>&id_dia=<?php echo $indice["id_dia"];?>" >  
+                                href="" >  
                                 
                                 <?php  
-                                if($indice['dia_numero']>9) 
+                                if($indice['dia_numero']>10) 
                                 {echo $indice['dia_numero'];}
                                 else{echo "0". $indice['dia_numero'];} 
                                 ?> 
@@ -70,7 +66,7 @@ session_start();
                             </td>
 
                             <td style="text-align:center;">
-                                <a href="../CONTROLADORES/ProgramacionControlador.php?op=10&id_dia=<?php echo $indice["id_dia"];?>"
+                                <a href=""
                                 class="btn btn-danger">Eliminar</a>
                             </td>
                         </tr>
@@ -84,16 +80,11 @@ session_start();
 </section>
     <footer>
         <div class="footer">
-            <a  id="Regresar" class="btn btn-info" href="Menu_Meses.php"> Volver a Meses </a>
-            
 
-            <a  href="MenuPrincipal.php" class="btn btn-secondary"> 
-            Volver al Menu
-            </a>
-            
-            <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_dias" > 
-                        Crear Dia 
+            <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_agno" > 
+            Crear Año 
             </buttom>
+            <a id="Regresar" href="MenuPrincipal.php" class="btn btn-info"> Volver al Menu </a>
         </div>
     </footer>
 

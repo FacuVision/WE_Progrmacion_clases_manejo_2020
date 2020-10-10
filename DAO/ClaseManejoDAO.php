@@ -2,7 +2,6 @@
 
 require_once('../BEAN/ClaseManejoBean.php');
 require_once('../UTILS/ConexionBD.php');
-require_once('../BEAN/DiaBean.php');
 
 class ClaseManejoDAO{
 
@@ -17,30 +16,6 @@ class ClaseManejoDAO{
         return $lista;
     }
 
-    public function listarClases(DiaBean $DiaBean){
-
-        $instanciacompartida = ConexionBD::getInstance();
-        $dia_numero = $DiaBean->getDia_numero();
-
-        $sql = "SELECT  class.clas_fecha, det.det_horario, cur.cur_nombre, cur.cur_horas, det.det_n_clase, alum.alum_nombre,alum.alum_apellido, emp.emp_nombre, co.coche_tipo ,det.det_asistencia
-                FROM clases_manejo as class 
-                INNER JOIN detalle_clases_manejo as det on det.id_clase_manejo = class.id_clase_manejo
-                INNEr JOIN alumnos as alum on alum.id_alumno=det.id_alumno
-                INNER JOIN instructores as ins on ins.id_instructor=class.id_instructor
-                INNER join coches as co on co.id_coche=det.id_coche
-                INNER JOIN cursos as cur on cur.id_curso=det.id_curso
-                INNER join empleados as emp on emp.id_empleado=ins.id_empleado
-                INNER JOIN dias as dia on dia.id_dia=class.id_dia 
-                WHERE dia.dia_numero=$dia_numero
-                ORDER BY det.det_horario asc";
-        
-        
-        $res = $instanciacompartida->ejecutar($sql);
-        $lista = $instanciacompartida->obtener_filas($res);
-        
-        //echo '<pre>' . var_export($lista, true) . '</pre>';
-        return $lista;
-    }
 
 
 }
