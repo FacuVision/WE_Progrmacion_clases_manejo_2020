@@ -81,11 +81,13 @@ session_start();
 </section>
     <footer>
         <div class="footer">
-
-            <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_agno" > 
+        <a class="btn btn-secondary" href="MenuPrincipal.php" > 
+                Volver al Menu
+            </a>
+            <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_dias" > 
             Crear Año 
             </buttom>
-            <a id="Regresar" href="MenuPrincipal.php" class="btn btn-info"> Volver al Menu </a>
+            <a id="Regresar" href="Menu_Meses.php" class="btn btn-info"> Volver a meses </a>
         </div>
     </footer>
 

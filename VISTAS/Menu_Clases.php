@@ -8,7 +8,9 @@ session_start();
         $numero_agno = $_SESSION['fechas']["año"];
         $numero_dia = $_SESSION['fechas']["dia"];
 
-        //echo '<pre>' . var_export($lista_dias, true) . '</pre>';
+    /* echo '<pre>' . var_export($_SESSION['fechas'], true) . '</pre>';
+        echo '<pre>' . var_export($_SESSION['id_fechas'], true) . '</pre>';*/
+
 
     } else{
         echo '<script> document.location.href="Login.php";</script>';  
@@ -92,7 +94,7 @@ session_start();
     <footer>
         <div class="footer">
 
-            <a  id="Regresar" class="btn btn-info" href="Menu_Meses.php"> Volver a Meses </a>
+            <a  id="Regresar" class="btn btn-info" href="Menu_dias.php"> Volver a Dias </a>
             
             <a  href="MenuPrincipal.php" class="btn btn-secondary"> 
             Volver al Menu
