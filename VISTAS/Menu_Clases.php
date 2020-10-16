@@ -79,7 +79,7 @@ session_start();
                             <td><?php echo $key['det_asistencia'] ?> </td>
 
                             <td style="text-align:center;">
-                                <a href="../CONTROLADORES/ProgramacionControlador.php?op=10&id_dia=<?php echo $indice["id_dia"];?>"
+                                <a href="#"
                                 class="btn btn-danger">Eliminar</a>
                             </td>
                         </tr>
