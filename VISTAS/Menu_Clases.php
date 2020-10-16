@@ -26,7 +26,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Dias</title>
     <?php include('../VISTAS/TEMPLATES/ImportacionesCabecera.php'); ?>
-    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilos_clases.css">
+    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilo_clase.css">
 
 </head>
 

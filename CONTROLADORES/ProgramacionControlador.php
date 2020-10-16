@@ -224,7 +224,7 @@ switch ($opciones) {
         $_SESSION['id_fechas']["id_dia"] = $_REQUEST['id_dia'];
         $_SESSION['fechas']["dia"]= $_REQUEST['numero_dia'];
 
-        $DiaBean->setDia_numero($_SESSION['fechas']["dia"]);
+        $DiaBean->setId_dia($_SESSION['id_fechas']["id_dia"]);
 
         $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean);
 

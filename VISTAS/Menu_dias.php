@@ -85,7 +85,7 @@ session_start();
                 Volver al Menu
             </a>
             <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_dias" > 
-            Crear Año 
+            Crear Dia 
             </buttom>
             <a id="Regresar" href="Menu_Meses.php" class="btn btn-info"> Volver a meses </a>
         </div>

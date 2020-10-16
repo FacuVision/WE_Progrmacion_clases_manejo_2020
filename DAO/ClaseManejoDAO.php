@@ -20,7 +20,7 @@ class ClaseManejoDAO{
     public function listarClases(DiaBean $DiaBean){
 
         $instanciacompartida = ConexionBD::getInstance();
-        $dia_numero = $DiaBean->getDia_numero();
+        $dia_numero = $DiaBean->getId_dia();
 
         $sql = "SELECT  class.clas_fecha, det.det_horario, cur.cur_nombre, cur.cur_horas, det.det_n_clase, alum.alum_nombre,alum.alum_apellido, emp.emp_nombre, co.coche_tipo ,det.det_asistencia
                 FROM clases_manejo as class 
@@ -31,14 +31,15 @@ class ClaseManejoDAO{
                 INNER JOIN cursos as cur on cur.id_curso=det.id_curso
                 INNER join empleados as emp on emp.id_empleado=ins.id_empleado
                 INNER JOIN dias as dia on dia.id_dia=class.id_dia 
-                WHERE dia.dia_numero=$dia_numero
+                WHERE dia.id_dia=$dia_numero
                 ORDER BY det.det_horario asc";
         
         $res = $instanciacompartida->ejecutar($sql);
         $lista = $instanciacompartida->obtener_filas($res);
-        
+        //echo $sql;
+
         $instanciacompartida->setArray(null);
-        
+        //die();
         //echo '<pre>' . var_export($lista, true) . '</pre>';
         return $lista;
     }
