@@ -142,14 +142,58 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
 
 
+    <!-- MODAL PARA CREAR UNA PROGRAMACION VACIA CON SU INSTRUCTOR CORRESPONDIENTE -->
+<form method="post" action="../CONTROLADORES/ClasesControlador.php?op=1">
+<!-- Modal -->
+<div class="modal fade" id="crear_programacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"> Crear programacion de clases </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Seleccione Instructor asignado</label>
+            <select class="form-control"  name="instructor">
+                    <?php foreach ($TodoInstructor as $key ) {?>
+                        <option  value="<?php echo $key['id_instructor']?>"> <?php echo $key['emp_nombre'];?> </option>
+                    <?php } ?>
+                </select>
+        </div>
+        <div class="form-group">
+            <label>Añadir Descripcion (opcional)</label>
+            <textarea name="descripcion" class="form-control" id="descripcion" rows="3"></textarea>
+        </div>
+
+
+
+        </div>
+            <div class="modal-footer">
+                <input value="Insertar" type="submit" class="btn btn-success">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
+
+
+
+
 
 
 <!-- SCRIPTS DE INICIACION DE MODALES -->
-    <script>
+<script>
     $('#myModal').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
     })
-
-    </script>
+</script>
 
 

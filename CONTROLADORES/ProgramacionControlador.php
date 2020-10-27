@@ -7,6 +7,7 @@ require_once('../DAO/AgnoDAO.php');
 require_once('../DAO/MesDAO.php');
 require_once('../DAO/DiaDAO.php');
 require_once('../DAO/ClaseManejoDAO.php');
+require_once('../DAO/InstructorDAO.php');
 
 require_once('../BEAN/ClaseManejoBean.php');
 require_once('../BEAN/AgnoBean.php');
@@ -217,21 +218,48 @@ switch ($opciones) {
     case 11:{
             
         //ESTA ZONA ES PARA LISTAR LAS PROGRAMACIONES DE CLASES SEGUN EL DIA QUE SE SELECCIONÓ
+
         
+        $eleccion = 0;
+
+        if (isset($_REQUEST['sel_instructor'])){
+            $eleccion = 1;
+        }
+
         $DiaBean = new DiaBean();
         $ClaseManejoDAO = new ClaseManejoDAO();
+        $InstructoresDAO = new InstructorDAO();
 
-        $_SESSION['id_fechas']["id_dia"] = $_REQUEST['id_dia'];
-        $_SESSION['fechas']["dia"]= $_REQUEST['numero_dia'];
+        if($eleccion==0){
+            $_SESSION['id_fechas']["id_dia"] = $_REQUEST['id_dia'];
+            $_SESSION['fechas']["dia"]= $_REQUEST['numero_dia'];
+        }
 
         $DiaBean->setId_dia($_SESSION['id_fechas']["id_dia"]);
+    
+        $_SESSION['listaInstructores'] = $InstructoresDAO->listarInstructoresConClase($_SESSION['id_fechas']["id_dia"]);
 
-        $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean);
+                if($eleccion == 1){
+                    
+                    $nombre_id = explode("-", $_REQUEST['sel_instructor']); //separamos los guiones 
+                    $listaInstructor = array("id"=>0, "nombre"=>"instructor");
 
-        echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
+                    //llemanos array para mas tarde
+                    $listaInstructor["id"] = $nombre_id[0];
+                    $listaInstructor["nombre"] = $nombre_id[1];
+
+                    //llenamos la sesion
+                    $_SESSION["seleccion"] =  $listaInstructor;
+
+                    $primerInstructor = $nombre_id[0]; //id
+                }else{
+                    $primerInstructor = $_SESSION['listaInstructores'][0]['id_instructor']; //obtenemos el primer instructor
+                }
+
+        $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean,$primerInstructor);
+        $_SESSION['TodoInstructor'] = $InstructoresDAO->listarInstructores();
         
-        //echo '<pre>' . var_export($_SESSION['fechas'], true) . '</pre>';
-        //echo '<pre>' . var_export($_SESSION['id_fechas'], true) . '</pre>';
+        echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
 
     break;
 
