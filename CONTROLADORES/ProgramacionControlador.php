@@ -219,49 +219,47 @@ switch ($opciones) {
             
         //ESTA ZONA ES PARA LISTAR LAS PROGRAMACIONES DE CLASES SEGUN EL DIA QUE SE SELECCIONÓ
 
-        
-        $eleccion = 0;
-
-        if (isset($_REQUEST['sel_instructor'])){
-            $eleccion = 1;
-        }
-
-        $DiaBean = new DiaBean();
+        $eleccion = 0; //nos dice no hemos usado el <select>
+        $DiaBean = new DiaBean();   //creamos los objetos para las consultas
         $ClaseManejoDAO = new ClaseManejoDAO();
         $InstructoresDAO = new InstructorDAO();
 
-        if($eleccion==0){
+        if (isset($_REQUEST['sel_instructor'])){    
+            $eleccion = 1;  //significa que usamos el <select>
+        }
+
+        if($eleccion==0){   //significa que no usamos el <select> y venimos redireccionados del manu de dias.php
             $_SESSION['id_fechas']["id_dia"] = $_REQUEST['id_dia'];
             $_SESSION['fechas']["dia"]= $_REQUEST['numero_dia'];
         }
 
         $DiaBean->setId_dia($_SESSION['id_fechas']["id_dia"]);
-    
         $_SESSION['listaInstructores'] = $InstructoresDAO->listarInstructoresConClase($_SESSION['id_fechas']["id_dia"]);
 
-                if($eleccion == 1){
+        if($eleccion == 1){
                     
-                    $nombre_id = explode("-", $_REQUEST['sel_instructor']); //separamos los guiones 
-                    $listaInstructor = array("id"=>0, "nombre"=>"instructor");
+            $nombre_id = explode("-", $_REQUEST['sel_instructor']);     //separamos los guiones 
+            $listaInstructor = array("id"=>0, "nombre"=>"instructor");  //array de datos de instructor
 
-                    //llemanos array para mas tarde
-                    $listaInstructor["id"] = $nombre_id[0];
-                    $listaInstructor["nombre"] = $nombre_id[1];
+            //llemanos array para mas tarde
+            $listaInstructor["id"] = $nombre_id[0];
+            $listaInstructor["nombre"] = $nombre_id[1];
 
-                    //llenamos la sesion
-                    $_SESSION["seleccion"] =  $listaInstructor;
+            //llenamos la sesion
+            $_SESSION["seleccion"] =  $listaInstructor;
 
-                    $primerInstructor = $nombre_id[0]; //id
-                }else{
-                    $primerInstructor = $_SESSION['listaInstructores'][0]['id_instructor']; //obtenemos el primer instructor
-                }
+            $primerInstructor = $listaInstructor["id"]; //id
+        }else{
+
+            $primerInstructor = $_SESSION['listaInstructores'][0]['id_instructor']; //obtenemos el primer instructor
+
+        }
 
         $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean,$primerInstructor);
         $_SESSION['TodoInstructor'] = $InstructoresDAO->listarInstructores();
+
+        echo '<script>document.location.href="../VISTAS/Menu_Clases.php";</script>';
         
-        echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
-
-    break;
-
+        break;
     }
 }

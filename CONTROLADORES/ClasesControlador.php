@@ -49,7 +49,29 @@ switch ($opciones) {
                 echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
             }
             break;
-
         }
-        
+
+        case 2:{
+
+            if(isset($_REQUEST)){
+                extract($_REQUEST);
+
+                if(isset($editarComentario)){
+
+                    $claseManejoBean = new ClaseManejoBean();
+                    $ClaseManejoDAO = new ClaseManejoDAO();
+
+                    $claseManejoBean->setClas_descripcion($comentario);
+                    $claseManejoBean->setId_clase_manejo($id_clase);
+                    $claseManejoBean->setId_instructor($id_instructor);
+
+                    $ClaseManejoDAO->EditarDescripcion($claseManejoBean);
+
+                    echo '<script> document.location.href="/CONTROLADORES/ProgramacionControlador.php?op=3";</script>';
+                }
+            }
+            
+            break;
+        }
+
     }

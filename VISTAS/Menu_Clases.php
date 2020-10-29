@@ -15,6 +15,16 @@ session_start();
         $numero_mes = $_SESSION['fechas']['mes'];
         $numero_agno = $_SESSION['fechas']["año"];
         $numero_dia = $_SESSION['fechas']["dia"];
+
+        $listaCursos = $_SESSION['listaCursos'];
+        $listaCoches = $_SESSION['listaCoches'] ;
+        $listaAlumnos = $_SESSION['listaAlumnos'];
+        $listahorarios = $_SESSION['horarios'];
+
+        //echo '<pre>' . var_export($listahorarios, true) . '</pre>';
+
+        
+
     } else{
         echo '<script> document.location.href="Login.php";</script>';  
     }
@@ -29,7 +39,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Dias</title>
     <?php include('../VISTAS/TEMPLATES/ImportacionesCabecera.php'); ?>
-    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilo_clase.css">
+    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilo_clases.css">
 
 </head>
 
@@ -43,11 +53,9 @@ session_start();
 
     
 
-    
     <section>
 
     <div class="dataTable">
-
     <div class="instructores">
         <form action="../CONTROLADORES/ProgramacionControlador.php" method="get">
         Selecciona instructor &nbsp;&nbsp;
@@ -60,17 +68,12 @@ session_start();
                 <input type="hidden" name="op" value="11">
                 <input class="btn btn-primary" type="submit" value="Seleccionar" name="enviar">
         </form>
-        <p> <?php 
-        
-        if(isset($instructorSeleccionado)){
-            echo "Mostrando programacion del instructor ".  $instructorSeleccionado["nombre"];
-        } else{
-            echo "Aun no has seleccionado ningun Instructor";
-        }
-
-
-        ?></p>
-                    
+        <p> 
+            <?php 
+            if(isset($instructorSeleccionado)){ echo "Mostrando programacion del instructor <strong>".  $instructorSeleccionado["nombre"]."</strong>";
+            }else{ echo "Aun no has seleccionado ningun Instructor";}
+            ?>
+        </p>            
     </div>   
 
     <form method="POST">                    
@@ -116,28 +119,42 @@ session_start();
                 </table>
             </div>
         </div>
+        <div class="clases">
+            <button id="clase" type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">Añadir clase</button>
+        </div>
     </form>
     </div>
+
+
+
+<form action="../CONTROLADORES/ClasesControlador.php?op=2" method="post">
+    <div class="comentarios">  
+        <div id="comentarios" class="form-group">
+            <label class="coment">Comentarios</label>
+            <textarea name="comentario" style="width:98%" class="form-control" rows="3"> <?php echo $listaClases[0]['clas_descripcion'] ?> </textarea>
+        </div>
+        <div class="botones">
+        <input type="hidden" name="id_clase" value="<?php echo $listaClases[0]['id_clase_manejo'] ?>">
+        <input type="hidden" name="id_instructor" value="<?php echo $listaClases[0]['id_instructor'] ?>">
+
+            <input type="submit" name="editarComentario" class="btn btn-warning" value="Editar Comentario"> 
+            <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_programacion"> Añadir programacion </buttom>
+        </div>
+    
+    </div>
+</form>
+
 </section>
     <footer>
+        
         <div class="footer">
-
-            <a  id="Regresar" class="btn btn-info" href="Menu_dias.php"> Volver a Dias </a>
-            
-            <a  href="MenuPrincipal.php" class="btn btn-secondary"> 
-            Volver al Menu
-            </a>
-            
-            <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_programacion" > 
-            Añadir programacion
-            </buttom>
+            <a class="btn btn-info" href="Menu_dias.php"> Volver a Dias </a>
+            <a href="MenuPrincipal.php" class="btn btn-secondary">  Volver al Menu </a>
         </div>
     </footer>
 
-    
     <?php include('../VISTAS/TEMPLATES/ImportacionesPie.php'); ?>
     <?php include('../VISTAS/TEMPLATES/modal_creacion.php'); ?>
     <script src="../LIBRERIAS/JS/DataTable_agnos.js"></script>
-    
 </body>
 </html>

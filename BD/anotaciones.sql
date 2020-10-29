@@ -1,7 +1,7 @@
 
 /* SESIONES CREADAS HASTA EL MOMENTO */
-
 /*echo '<pre>' . var_export($lista, true) . '</pre>';*/
+
 
 
 
@@ -16,6 +16,11 @@ $_SESSION['lista_agnos'];
 /*LISTA DE MESES*/
 $_SESSION['lista_meses'];
 
+$_SESSION['listaCoches'] 
+$_SESSION['listaCursos'] 
+$_SESSION['listaAlumnos']
+
+
 
 
 /*array_de_fechas*/
@@ -25,7 +30,12 @@ $horarios = array("1. 8am-9am", "2. 9am-10am", "3. 10am-11am", "4. 11am-12pm", "
 
 $_SESSION['fechas']= $fechas;
 $_SESSION['id_fechas']= $id_fechas;
+
 $_SESSION['horarios'] = $horarios;
+$_SESSION['lista_horarios'] = $lista_horarios;
+
+
+
 
 
 /*

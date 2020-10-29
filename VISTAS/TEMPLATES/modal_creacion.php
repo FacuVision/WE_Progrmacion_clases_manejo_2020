@@ -153,6 +153,7 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
+
         </div>
 
         <div class="modal-body">
@@ -184,6 +185,126 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
 
 
+    <!-- MODAL PARA CREAR UNA CLASE VACIA CON SU INSTRUCTOR CORRESPONDIENTE -->
+
+<style>
+
+
+.horario {    
+    font-size: 12px;   margin: 15px 25% 0px 25%;   width:50%;  text-align: center;    border-collapse: collapse; }
+
+    .horario th {     font-size: 13px;     font-weight: normal;     padding: 8px;     background: #F1F1F1;
+    border-top: 4px solid #aabcfe;   }
+
+    .horario td {    background: #F1F1F1;   
+    color: #669;    border-top: 1px solid transparent; }
+
+.horario tr:hover td { background: white; color: #339; }
+
+</style>
+
+<form method="post" action="../CONTROLADORES/ClasesControlador.php?op=1">
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"> Añadir Clase </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <table class="horario">
+                <tr>
+                    <td>Lista De Horarios por Asignar</td>
+                </tr>
+
+        </table>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Curso </label>
+                    <div class="form-group">
+                    <select class="form-control"  name="instructor">
+                            <?php foreach ($listaCursos as $key ) {?>
+                                <option  value="<?php echo $key['id_curso']?>"> <?php echo $key['cur_nombre']." - ". $key['cur_horas']. " horas ";?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <label for="recipient-name" class="col-form-label">Coche </label>
+                    <div class="form-group">
+                    <select class="form-control"  name="instructor">
+                            <?php foreach ($listaCoches as $key ) {?>
+                                <option  value="<?php echo $key['id_coche']?>"> <?php echo $key['coche_marca']." (". $key['coche_modelo']. ", ". $key['coche_tipo']. ", ". $key['coche_placa']. ")";?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <label for="recipient-name" class="col-form-label">Alumno </label>
+                    <div class="form-group">
+                    <select class="form-control"  name="instructor">
+                            <?php foreach ($listaAlumnos as $key ) {?>
+                                <option  value="<?php echo $key['id_alumno']?>"> <?php echo $key['alum_nombre']." ". $key['alum_apellido'] . " - (".$key['alum_telefono']. ", ". $key['alum_correo']. ")"   ;?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <label for="recipient-name" class="col-form-label">Horario </label>
+                    <div class="form-group">
+                    <select class="form-control"  name="instructor">
+                            <?php foreach ($listahorarios as $key ) {?>
+                                <option  value="<?php  echo $key; ?>"> <?php echo $key; ?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>                
+
+
+                    <label for="recipient-name" class="col-form-label">N° de Hora de Clase</label>
+                    <div class="form-group">
+                    <select class="form-control"  name="instructor">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="HR">H. Recuperada</option>
+                            <option value="HE">H. Extra</option>
+                    </select>
+                    </div>
+
+                    <label for="recipient-name" class="col-form-label">Asistencia</label>
+                    <div class="form-group">
+                    <select class="form-control"  name="instructor">
+                            <option value="Asistio">Asistio</option>
+                            <option value="Falta">Falta</option>
+                            <option value="Tardanza">Tardanza</option>
+                            <option value="Programado">Programado</option>
+                    </select>
+                    </div>
+
+
+
+                    </div>
+                        <div class="modal-footer">
+                            <input value="Insertar" type="submit" class="btn btn-success">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                </div>
+            </div>
+    </div>
+</div>
+</form>
 
 
 
