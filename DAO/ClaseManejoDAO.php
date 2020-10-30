@@ -5,19 +5,25 @@ require_once('../BEAN/DiaBean.php');
 
 class ClaseManejoDAO{
 
+    public function listarClaseManejo($id_dia, $id_instructor)
+    {
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "SELECT * FROM clases_manejo WHERE id_dia = $id_dia AND id_instructor = $id_instructor";
+        $res = $instanciacompartida->ejecutar($sql);
+        $lista = $instanciacompartida->obtener_filas($res);
+        $instanciacompartida->setArray(null);
+
+        return $lista;
+    }
+
     public function listarAgnos(){
 
         $instanciacompartida = ConexionBD::getInstance();
         $sql = "SELECT * FROM agnos";
         $res = $instanciacompartida->ejecutar($sql);
         $lista = $instanciacompartida->obtener_filas($res);
-        
-        //echo '<pre>' . var_export($lista, true) . '</pre>';
         return $lista;
     }
-
-
-
 
     public function listarClases(DiaBean $DiaBean, $id_instructor){
 
@@ -59,13 +65,22 @@ class ClaseManejoDAO{
         $_SESSION['listaCoches'] = $this->listarCoches();
         $_SESSION['listaCursos'] = $this->listarCursos();
         $_SESSION['listaAlumnos'] = $this->listarAlumnos();
-
-
-
+        
         return $lista;
     }
 
 
+    public function CalcularHorarios(){   
+
+        $listahorarios = array();
+        if(!empty($_SESSION['listaClases'])){
+            foreach ($_SESSION['listaClases'] as $key) { //construimos un array
+                array_push($listahorarios,$key["det_horario"]) ;
+            }
+        }
+        //restamos a los que ya tenemos
+        $_SESSION['lista_horarios'] = array_diff($_SESSION['horarios'],$listahorarios);
+    }
 
     public function listarCursos(){
         $instanciacompartida = ConexionBD::getInstance();
@@ -137,7 +152,8 @@ class ClaseManejoDAO{
 
         $instanciacompartida = ConexionBD::getInstance();
         $sql = "UPDATE clases_manejo SET clas_descripcion='$descripcion' WHERE id_clase_manejo=$id_clase";
-        
+        echo $sql;
+        //die();
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         
 
@@ -145,9 +161,47 @@ class ClaseManejoDAO{
         $DiaBean = new DiaBean();
 
         $DiaBean->setId_dia($_SESSION['id_fechas']['id_dia']);
-        $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean, $id_instructor);
 
+        $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean, $id_instructor);
+        $_SESSION["clase_manejo"]= $ClaseManejoDAO->listarClaseManejo($_SESSION['id_fechas']['id_dia'],$id_instructor);
+
+        //die();
         echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
     }
 
+
+    public function evaluarHorarios($horario)
+    {   
+        $rpta = "malo";
+        foreach ($_SESSION['lista_horarios'] as $key) {
+            if($key == $horario){
+                $rpta = "bueno";
+            } 
+        }
+        return $rpta;
+    }
+
+
+
+    public function insertarClase(DetalleClaseManejoBean $DetalleClaseManejoBean){
+
+        $id_coche = $DetalleClaseManejoBean->getId_coche();
+        $id_curso = $DetalleClaseManejoBean->getId_curso();
+        $id_clase_manejo = $DetalleClaseManejoBean->getId_clase_manejo();
+        $id_alumno = $DetalleClaseManejoBean->getId_alumno();
+        $det_asistencia = $DetalleClaseManejoBean->getDet_asistencia();
+        $n_hora_clase = $DetalleClaseManejoBean->getDet_n_clase();
+        $horario = $DetalleClaseManejoBean->getDet_horario();
+
+        
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "INSERT INTO detalle_clases_manejo (id_clase_manejo, id_curso, id_alumno, id_coche, det_horario, det_asistencia, det_n_clase) 
+                VALUES ($id_clase_manejo,$id_curso,$id_alumno,$id_coche,'$horario','$det_asistencia','$n_hora_clase')";
+    
+        $estado = $instanciacompartida->EjecutarConEstado($sql);
+        return $estado;
+
+
+        
+    }
 }

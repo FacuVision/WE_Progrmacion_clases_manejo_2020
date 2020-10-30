@@ -185,25 +185,12 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
 
 
+
+
     <!-- MODAL PARA CREAR UNA CLASE VACIA CON SU INSTRUCTOR CORRESPONDIENTE -->
 
-<style>
 
-
-.horario {    
-    font-size: 12px;   margin: 15px 25% 0px 25%;   width:50%;  text-align: center;    border-collapse: collapse; }
-
-    .horario th {     font-size: 13px;     font-weight: normal;     padding: 8px;     background: #F1F1F1;
-    border-top: 4px solid #aabcfe;   }
-
-    .horario td {    background: #F1F1F1;   
-    color: #669;    border-top: 1px solid transparent; }
-
-.horario tr:hover td { background: white; color: #339; }
-
-</style>
-
-<form method="post" action="../CONTROLADORES/ClasesControlador.php?op=1">
+<form method="post" action="../CONTROLADORES/ClasesControlador.php?op=3">
 <!-- Modal -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -216,17 +203,22 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
         </div>
 
         <table class="horario">
+                <?php $cont = 0;
+                
+                foreach($listaPorTerminar as $key): ?>  
+                    
                 <tr>
-                    <td>Lista De Horarios por Asignar</td>
+                    <td><?php echo str_replace(".","",substr($key,-9,10)); $cont++;?></td>
                 </tr>
 
+                <?php endforeach; ?>    
         </table>
-
+            <?php echo "<label style='text-align:center; margin-top:5px; font-weight:bold'>" .$cont. "</label>";?>
             <div class="modal-body">
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Curso </label>
                     <div class="form-group">
-                    <select class="form-control"  name="instructor">
+                    <select class="form-control"  name="curso">
                             <?php foreach ($listaCursos as $key ) {?>
                                 <option  value="<?php echo $key['id_curso']?>"> <?php echo $key['cur_nombre']." - ". $key['cur_horas']. " horas ";?> </option>
                             <?php } ?>
@@ -234,7 +226,7 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
                     </div>
                     <label for="recipient-name" class="col-form-label">Coche </label>
                     <div class="form-group">
-                    <select class="form-control"  name="instructor">
+                    <select class="form-control"  name="coche">
                             <?php foreach ($listaCoches as $key ) {?>
                                 <option  value="<?php echo $key['id_coche']?>"> <?php echo $key['coche_marca']." (". $key['coche_modelo']. ", ". $key['coche_tipo']. ", ". $key['coche_placa']. ")";?> </option>
                             <?php } ?>
@@ -243,7 +235,7 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
                     <label for="recipient-name" class="col-form-label">Alumno </label>
                     <div class="form-group">
-                    <select class="form-control"  name="instructor">
+                    <select class="form-control"  name="alumno">
                             <?php foreach ($listaAlumnos as $key ) {?>
                                 <option  value="<?php echo $key['id_alumno']?>"> <?php echo $key['alum_nombre']." ". $key['alum_apellido'] . " - (".$key['alum_telefono']. ", ". $key['alum_correo']. ")"   ;?> </option>
                             <?php } ?>
@@ -252,7 +244,7 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
                     <label for="recipient-name" class="col-form-label">Horario </label>
                     <div class="form-group">
-                    <select class="form-control"  name="instructor">
+                    <select class="form-control"  name="horario">
                             <?php foreach ($listahorarios as $key ) {?>
                                 <option  value="<?php  echo $key; ?>"> <?php echo $key; ?> </option>
                             <?php } ?>
@@ -262,7 +254,7 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
                     <label for="recipient-name" class="col-form-label">N° de Hora de Clase</label>
                     <div class="form-group">
-                    <select class="form-control"  name="instructor">
+                    <select class="form-control"  name="n_hora_clase">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -285,13 +277,24 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
                     <label for="recipient-name" class="col-form-label">Asistencia</label>
                     <div class="form-group">
-                    <select class="form-control"  name="instructor">
-                            <option value="Asistio">Asistio</option>
-                            <option value="Falta">Falta</option>
-                            <option value="Tardanza">Tardanza</option>
-                            <option value="Programado">Programado</option>
-                    </select>
+                        <select class="form-control"  name="asistencia">
+                                <option value="Asistio">Asistio</option>
+                                <option value="Falta">Falta</option>
+                                <option value="Tardanza">Tardanza</option>
+                                <option value="Programado">Programado</option>
+                        </select>
                     </div>
+
+                    
+                
+                    <input type="hidden" name="id_clase_manejo" value="
+                    <?php 
+                        if(empty($listaClases)){
+                            echo $clase_manejo[0]['id_clase_manejo'];
+                        }  else{
+                            echo $listaClases[0]['id_clase_manejo'];
+                        } 
+                    ?>">
 
 
 
@@ -300,7 +303,7 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
                             <input value="Insertar" type="submit" class="btn btn-success">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </div>
-                </div>
+                    </div>
             </div>
     </div>
 </div>

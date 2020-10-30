@@ -153,6 +153,7 @@ switch ($opciones) {
 
                 $MesBean->setMes_numero($_REQUEST['meses_nombre_numero']);
                 $MesBean->setId_año($_SESSION['id_fechas']["id_agno"]);
+                
                 $estado = $MesDAO->insertar_mes($MesBean);
 
                 echo '<script> document.location.href="ProgramacionControlador.php?op=4&validacion=1";</script>';
@@ -206,6 +207,7 @@ switch ($opciones) {
         $DiaDAO = new DiaDAO();
 
         $DiaBean->setId_dia($_REQUEST['id_dia']);
+        
         $estado = $DiaDAO->eliminar_dia($DiaBean);
 
         echo '<script> document.location.href="ProgramacionControlador.php?op=7&validacion=1";</script>';
@@ -220,6 +222,7 @@ switch ($opciones) {
         //ESTA ZONA ES PARA LISTAR LAS PROGRAMACIONES DE CLASES SEGUN EL DIA QUE SE SELECCIONÓ
 
         $eleccion = 0; //nos dice no hemos usado el <select>
+        
         $DiaBean = new DiaBean();   //creamos los objetos para las consultas
         $ClaseManejoDAO = new ClaseManejoDAO();
         $InstructoresDAO = new InstructorDAO();
@@ -234,7 +237,8 @@ switch ($opciones) {
         }
 
         $DiaBean->setId_dia($_SESSION['id_fechas']["id_dia"]);
-        $_SESSION['listaInstructores'] = $InstructoresDAO->listarInstructoresConClase($_SESSION['id_fechas']["id_dia"]);
+        
+                $_SESSION['listaInstructores'] = $InstructoresDAO->listarInstructoresConClase($_SESSION['id_fechas']["id_dia"]);
 
         if($eleccion == 1){
                     
@@ -247,19 +251,26 @@ switch ($opciones) {
 
             //llenamos la sesion
             $_SESSION["seleccion"] =  $listaInstructor;
-
             $primerInstructor = $listaInstructor["id"]; //id
+
+            //obtenemos datos de la clase de manejo
+            
+                $_SESSION["clase_manejo"]= $ClaseManejoDAO->listarClaseManejo($_SESSION['id_fechas']['id_dia'],$primerInstructor);
+        
         }else{
 
             $primerInstructor = $_SESSION['listaInstructores'][0]['id_instructor']; //obtenemos el primer instructor
-
+            $_SESSION["seleccion"]["id"] =  $primerInstructor;
+            $_SESSION["seleccion"]["nombre"] = $_SESSION['listaInstructores'][0]['emp_nombre'];
         }
 
-        $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean,$primerInstructor);
-        $_SESSION['TodoInstructor'] = $InstructoresDAO->listarInstructores();
+                $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean,$primerInstructor);
+        
+                $ClaseManejoDAO->CalcularHorarios();
+
+                $_SESSION['TodoInstructor'] = $InstructoresDAO->listarInstructores();
 
         echo '<script>document.location.href="../VISTAS/Menu_Clases.php";</script>';
-        
         break;
     }
 }

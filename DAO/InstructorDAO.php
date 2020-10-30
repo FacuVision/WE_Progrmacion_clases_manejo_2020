@@ -31,11 +31,23 @@ class InstructorDAO{
         $res = $instanciacompartida->ejecutar($sql);
         $lista = $instanciacompartida->obtener_filas($res);
 
-            $instanciacompartida->setArray($lista);
+        $instanciacompartida->setArray(null);
         return $lista;
     }
 
+    public function listarInstructoresID($id){
 
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "SELECT * FROM instructores as ins 
+                INNER JOIN empleados as emp on emp.id_empleado = ins.id_empleado 
+                WHERE ins.id_instructor=$id";
+        $res = $instanciacompartida->ejecutar($sql);
+        $lista = $instanciacompartida->obtener_filas($res);
+
+        $instanciacompartida->setArray(null);
+        return $lista;
+    }
+    
 }
 
 

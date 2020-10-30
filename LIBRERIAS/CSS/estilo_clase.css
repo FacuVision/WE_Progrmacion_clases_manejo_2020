@@ -64,3 +64,13 @@ section{
     right: 0;
 }
 
+.horario {    
+    font-size: 12px;   margin: 15px 25% 0px 25%;   width:50%;  text-align: center;    border-collapse: collapse; }
+
+    .horario th {     font-size: 13px;     font-weight: normal;     padding: 8px;     background: #F1F1F1;
+    border-top: 4px solid #aabcfe;   }
+
+    .horario td {    background: #F1F1F1;   
+    color: #669;    border-top: 1px solid transparent; }
+
+.horario tr:hover td { background: white; color: #339; }

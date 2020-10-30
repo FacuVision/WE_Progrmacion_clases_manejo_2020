@@ -1,16 +1,23 @@
 <?php
 session_start();
 
+
     if (!empty($_SESSION['nombre'])) 
     {
         $listaClases = $_SESSION['listaClases']; 
+
         if(isset($_SESSION["seleccion"])){
             $instructorSeleccionado = $_SESSION["seleccion"];
         }
-
-        $instructor = $_SESSION['listaClases']; 
+        
         $listaInstructores = $_SESSION['listaInstructores'];
+    
+        if(isset($_SESSION["clase_manejo"])){
+            $clase_manejo = $_SESSION["clase_manejo"];
+        }
+        
         $TodoInstructor = $_SESSION['TodoInstructor'];
+
         $nombre_mes = $_SESSION['fechas']["mes_nombre"];
         $numero_mes = $_SESSION['fechas']['mes'];
         $numero_agno = $_SESSION['fechas']["año"];
@@ -19,11 +26,15 @@ session_start();
         $listaCursos = $_SESSION['listaCursos'];
         $listaCoches = $_SESSION['listaCoches'] ;
         $listaAlumnos = $_SESSION['listaAlumnos'];
+
         $listahorarios = $_SESSION['horarios'];
-
-        //echo '<pre>' . var_export($listahorarios, true) . '</pre>';
-
+        $listaPorTerminar = $_SESSION['lista_horarios'];
+        //echo "1". $clase_manejo[0]["clas_descripcion"];
+ 
+        //echo "2". $listaClases[0]['clas_descripcion'] ;
         
+
+
 
     } else{
         echo '<script> document.location.href="Login.php";</script>';  
@@ -39,7 +50,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Dias</title>
     <?php include('../VISTAS/TEMPLATES/ImportacionesCabecera.php'); ?>
-    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilo_clases.css">
+    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilo_clase.css">
 
 </head>
 
@@ -57,21 +68,25 @@ session_start();
 
     <div class="dataTable">
     <div class="instructores">
-        <form action="../CONTROLADORES/ProgramacionControlador.php" method="get">
+
+    <form action="../CONTROLADORES/ProgramacionControlador.php" method="get">
         Selecciona instructor &nbsp;&nbsp;
 
                 <select class="form-control" style="width:5%; display:inline; margin-bottom:20px" name="sel_instructor">
-                    <?php foreach ($listaInstructores as $key ) {?>
+                    <?php 
+                    if(!empty($listaInstructores)){
+                    foreach ($listaInstructores as $key ) {?>
                         <option  value="<?php echo $key['id_instructor']."-".$key['emp_nombre'];?>"> <?php echo $key['emp_nombre'];?> </option>
-                    <?php } ?>
+                    <?php } } else { echo "<option> ----- </option>";} ?>
                 </select>
+
                 <input type="hidden" name="op" value="11">
                 <input class="btn btn-primary" type="submit" value="Seleccionar" name="enviar">
-        </form>
-        <p> 
+    </form>
+        <p id="seleccion"> 
             <?php 
-            if(isset($instructorSeleccionado)){ echo "Mostrando programacion del instructor <strong>".  $instructorSeleccionado["nombre"]."</strong>";
-            }else{ echo "Aun no has seleccionado ningun Instructor";}
+            if($instructorSeleccionado["nombre"] != null){ echo "Mostrando programacion del instructor <strong>".  $instructorSeleccionado["nombre"]."</strong>";
+            }else{ echo "<label id='ninguno'> Aun no has seleccionado ningun Instructor </label>";}
             ?>
         </p>            
     </div>   
@@ -131,11 +146,41 @@ session_start();
     <div class="comentarios">  
         <div id="comentarios" class="form-group">
             <label class="coment">Comentarios</label>
-            <textarea name="comentario" style="width:98%" class="form-control" rows="3"> <?php echo $listaClases[0]['clas_descripcion'] ?> </textarea>
+            
+            <textarea name="comentario" style="width:98%" class="form-control" rows="3"> <?php 
+            if( $listaClases[0]['clas_descripcion'] == null){
+                if(isset($clase_manejo)){
+                    echo $clase_manejo[0]["clas_descripcion"];
+                }else{
+                    echo "";
+                }
+            }else{
+                echo $listaClases[0]['clas_descripcion'] ;
+            }
+
+            ?> </textarea>
         </div>
         <div class="botones">
-        <input type="hidden" name="id_clase" value="<?php echo $listaClases[0]['id_clase_manejo'] ?>">
-        <input type="hidden" name="id_instructor" value="<?php echo $listaClases[0]['id_instructor'] ?>">
+
+        <input type="hidden" name="id_clase" value=" <?php 
+
+            if( $listaClases[0]['id_clase_manejo'] == null){
+                if(isset($clase_manejo)){
+                    echo $clase_manejo[0]["id_clase_manejo"];
+                }
+            }else{
+                echo $listaClases[0]['id_clase_manejo'] ;
+            }
+            ?> ">
+        
+        <input type="hidden" name="id_instructor" value=" <?php 
+            if( $listaClases[0]['id_instructor'] == null){
+                if(isset($clase_manejo)){
+                    echo $clase_manejo[0]["id_instructor"];
+                }
+            }else{
+                echo $listaClases[0]['id_instructor'] ;
+            } ?> ">
 
             <input type="submit" name="editarComentario" class="btn btn-warning" value="Editar Comentario"> 
             <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_programacion"> Añadir programacion </buttom>
@@ -156,5 +201,17 @@ session_start();
     <?php include('../VISTAS/TEMPLATES/ImportacionesPie.php'); ?>
     <?php include('../VISTAS/TEMPLATES/modal_creacion.php'); ?>
     <script src="../LIBRERIAS/JS/DataTable_agnos.js"></script>
+    <script>
+        $(document).ready(function () {
+            var texto = $("#ninguno").text();
+        
+            if(texto != ""){
+                $("#clase").hide(); 
+            }   
+            if(texto == ""){
+                $("#clase").show();
+            } 
+        });
+    </script>
 </body>
 </html>
