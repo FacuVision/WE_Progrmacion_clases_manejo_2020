@@ -44,7 +44,10 @@ session_start();
                     <thead>
                         <tr>
                             <th>Dia</th>
+                            <th>Estado</th>
                             <th>Accion</th>
+                            <th>Accion</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +67,21 @@ session_start();
                                 else{echo "0". $indice['dia_numero'];} 
                                 ?> 
                                 </a>
+                            </td>
+
+                            <td>
+                                    <?php 
+                                    
+                                    if($indice["dia_estado"]=="Con Datos"){
+                                        echo "<strong><span style='color:green'>" . $indice["dia_estado"] ."</span></Strong>";
+                                    } else{
+                                        echo $indice["dia_estado"];
+                                    }
+                                    ?>
+                            </td>
+
+                            <td style="text-align:center;">
+                                <buttom class="btn btn-warning" data-toggle="modal" data-target="#editarEstado" onclick="Editar(<?php echo $indice['id_dia']?>)"> Editar </buttom>
                             </td>
 
                             <td style="text-align:center;">
@@ -95,6 +113,14 @@ session_start();
     <?php include('../VISTAS/TEMPLATES/ImportacionesPie.php'); ?>
     <?php include('../VISTAS/TEMPLATES/modal_creacion.php'); ?>
     <script src="../LIBRERIAS/JS/DataTable_agnos.js"></script>
+
+    <script>
+    //permite obtener el id del dia y colocarlo en el modal
+        function Editar(id) {
+            let id_dia = id;
+            $("#id").val(id_dia);
+        }
+    </script>
     
 </body>
 </html>

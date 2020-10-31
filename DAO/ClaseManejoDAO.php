@@ -31,7 +31,7 @@ class ClaseManejoDAO{
         $dia_numero = $DiaBean->getId_dia();
 
         if(isset($id_instructor)){
-            $sql = "SELECT  class.id_clase_manejo,class.clas_fecha, det.det_horario, cur.cur_nombre, cur.cur_horas, det.det_n_clase, alum.alum_nombre,alum.alum_apellido, emp.emp_nombre, co.coche_tipo ,det.det_asistencia, class.clas_descripcion,ins.id_instructor
+            $sql = "SELECT  det.id_detalle_clases_manejo, class.id_clase_manejo,class.clas_fecha, det.det_horario, cur.cur_nombre, cur.cur_horas, det.det_n_clase, alum.alum_nombre,alum.alum_apellido, emp.emp_nombre, co.coche_tipo ,det.det_asistencia, class.clas_descripcion,ins.id_instructor
             FROM clases_manejo as class 
             INNER JOIN detalle_clases_manejo as det on det.id_clase_manejo = class.id_clase_manejo
             INNER JOIN alumnos as alum on alum.id_alumno=det.id_alumno
@@ -43,7 +43,7 @@ class ClaseManejoDAO{
             WHERE dia.id_dia= $dia_numero and ins.id_instructor = $id_instructor
             ORDER BY det.det_horario asc";
         }else{
-            $sql = "SELECT  class.id_clase_manejo,class.clas_fecha, det.det_horario, cur.cur_nombre, cur.cur_horas, det.det_n_clase, alum.alum_nombre,alum.alum_apellido, emp.emp_nombre, co.coche_tipo ,det.det_asistencia, class.clas_descripcion,ins.id_instructor
+            $sql = "SELECT  det.id_detalle_clases_manejo, class.id_clase_manejo,class.clas_fecha, det.det_horario, cur.cur_nombre, cur.cur_horas, det.det_n_clase, alum.alum_nombre,alum.alum_apellido, emp.emp_nombre, co.coche_tipo ,det.det_asistencia, class.clas_descripcion,ins.id_instructor
             FROM clases_manejo as class 
             INNER JOIN detalle_clases_manejo as det on det.id_clase_manejo = class.id_clase_manejo
             INNER JOIN alumnos as alum on alum.id_alumno=det.id_alumno

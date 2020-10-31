@@ -60,8 +60,8 @@ switch ($opciones) {
             $_SESSION['listaInstructores'] = $InstructorDAO->listarInstructoresConClase($_SESSION['id_fechas']["id_dia"]);
             $_SESSION["clase_manejo"]= $ClaseManejoDAO->listarClaseManejo($_SESSION['id_fechas']['id_dia'],$instructor);    
 
-                $_SESSION["seleccion"]["id"] =  $instructor;
-                $_SESSION["seleccion"]["nombre"] = $nombreSeleccionado[0]["emp_nombre"];
+                /*$_SESSION["seleccion"]["id"] =  $instructor;
+                $_SESSION["seleccion"]["nombre"] = $nombreSeleccionado[0]["emp_nombre"];*/
 
 
             echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
@@ -132,5 +132,60 @@ switch ($opciones) {
             }
             break;
         }
+        case 4:{
 
-    }
+            unset($_SESSION['listaClases']);
+            unset($_SESSION["seleccion"]);
+            unset($_SESSION["clase_manejo"]);
+            unset($_SESSION['listaCursos']);
+            unset($_SESSION['listaCoches']) ;
+            unset($_SESSION['listaAlumnos']);
+            unset($_SESSION['lista_horarios']);
+            
+                echo '<script> document.location.href="../VISTAS/Menu_dias.php";</script>';
+            
+            break;    
+        }
+            
+        case 5:{
+
+            
+            $DiaDAO = new DiaDAO();
+            $DiaBean = new DiaBean();
+
+            if(isset($_REQUEST)){
+                extract($_REQUEST);
+            }
+            $DiaBean->setdia_estado($edicion_estado);
+            $DiaBean->setId_dia($id_dia);
+
+            $DiaDAO->editarEstado($DiaBean);
+            $_SESSION['lista_dias'] = $DiaDAO->lista_dias_segun_mes($_SESSION['id_fechas']["id_mes"]);
+
+                echo '<script> document.location.href="../VISTAS/Menu_dias.php";</script>';
+            
+            break;    
+        }
+
+        case 6:{
+
+            
+            $DiaDAO = new DiaDAO();
+            $DiaBean = new DiaBean();
+
+            if(isset($_REQUEST)){
+                extract($_REQUEST);
+            }
+            $DiaBean->setdia_estado($edicion_estado);
+            $DiaBean->setId_dia($id_dia);
+
+            $DiaDAO->editarEstado($DiaBean);
+            $_SESSION['lista_dias'] = $DiaDAO->lista_dias_segun_mes($_SESSION['id_fechas']["id_mes"]);
+
+                echo '<script> document.location.href="../VISTAS/Menu_dias.php";</script>';
+            
+            break;    
+        }
+
+        }
+    

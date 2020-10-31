@@ -187,6 +187,59 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
 
 
+
+
+
+
+<!-- MODAL PARA EDITAR EL DIA (ESTADO) -->
+<form method="post" action="../CONTROLADORES/ClasesControlador.php?op=5">
+<!-- Modal -->
+<div class="modal fade" id="editarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"> Cambiar Estado </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Seleccione Estado</label>
+            <input type="hidden" name="id_dia" id="id">
+
+            <select class="form-control"  name="edicion_estado">
+                    <option value="Con Datos" >Con Datos </option>
+                    <option value="Sin Datos" >Sin Datos </option>
+            </select>
+        </div>
+
+        </div>
+            <div class="modal-footer">
+                <input value="Editar" type="submit" class="btn btn-success">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- MODAL PARA CREAR UNA CLASE VACIA CON SU INSTRUCTOR CORRESPONDIENTE -->
 
 
@@ -312,6 +365,121 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
 
 
+
+
+
+<!-- AQUI PODREMOS EDITAR UNA CLASE EN ESPECIFICO-->
+
+<form method="post" action="../CONTROLADORES/ClasesControlador.php?op=3">
+<!-- Modal -->
+<div id="EditarClase" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" style="color:orange" id="exampleModalLabel"> Editar Clase </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <table class="horario">
+                <?php $cont = 0;
+                
+                foreach($listaPorTerminar as $key): ?>  
+                    
+                <tr>
+                    <td><?php echo str_replace(".","",substr($key,-9,10)); $cont++;?></td>
+                </tr>
+
+                <?php endforeach; ?>    
+        </table>
+
+            <?php echo "<label style='text-align:center; margin-top:5px; font-weight:bold'>" .$cont. "</label>";?>
+    
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Editar Curso </label>
+                    <div class="form-group">
+                    <select class="form-control"  name="curso">
+                            <?php foreach ($listaCursos as $key ) {?>
+                                <option  value="<?php echo $key['id_curso']?>"> <?php echo $key['cur_nombre']." - ". $key['cur_horas']. " horas ";?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <label for="recipient-name" class="col-form-label">Editar Coche </label>
+                    <div class="form-group">
+                    <select class="form-control"  name="coche">
+                            <?php foreach ($listaCoches as $key ) {?>
+                                <option  value="<?php echo $key['id_coche']?>"> <?php echo $key['coche_marca']." (". $key['coche_modelo']. ", ". $key['coche_tipo']. ", ". $key['coche_placa']. ")";?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <label for="recipient-name" class="col-form-label">Editar Alumno </label>
+                    <div class="form-group">
+                    <select class="form-control"  name="alumno">
+                            <?php foreach ($listaAlumnos as $key ) {?>
+                                <option  value="<?php echo $key['id_alumno']?>"> <?php echo $key['alum_nombre']." ". $key['alum_apellido'] . " - (".$key['alum_telefono']. ", ". $key['alum_correo']. ")"   ;?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <label for="recipient-name" class="col-form-label">Editar Horario </label>
+                    <div class="form-group">
+                    <select class="form-control"  name="horario">
+                            <?php foreach ($listahorarios as $key ) {?>
+                                <option  value="<?php  echo $key; ?>"> <?php echo $key; ?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>                
+
+
+                    <label for="recipient-name" class="col-form-label">Editar N° de Hora de Clase</label>
+                    <div class="form-group">
+                    <select class="form-control"  name="n_hora_clase">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="HR">H. Recuperada</option>
+                            <option value="HE">H. Extra</option>
+                    </select>
+                    </div>
+
+                    <label for="recipient-name" class="col-form-label">Editar Asistencia</label>
+                    <div class="form-group">
+                        <select class="form-control"  name="asistencia">
+                                <option value="Asistio">Asistio</option>
+                                <option value="Falta">Falta</option>
+                                <option value="Tardanza">Tardanza</option>
+                                <option value="Programado">Programado</option>
+                        </select>
+                    </div>
+
+                    <input type="hidden" id="id_clase_manejo" name="clase_manejo">
+
+                    </div>
+                        <div class="modal-footer">
+                            <input value="Editar" type="submit" class="btn btn-warning">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+</form>
 
 <!-- SCRIPTS DE INICIACION DE MODALES -->
 <script>

@@ -5,6 +5,7 @@ session_start();
     if (!empty($_SESSION['nombre'])) 
     {
         $listaClases = $_SESSION['listaClases']; 
+        //echo '<pre>' . var_export($listaClases, true) . '</pre>';
 
         if(isset($_SESSION["seleccion"])){
             $instructorSeleccionado = $_SESSION["seleccion"];
@@ -29,10 +30,6 @@ session_start();
 
         $listahorarios = $_SESSION['horarios'];
         $listaPorTerminar = $_SESSION['lista_horarios'];
-        //echo "1". $clase_manejo[0]["clas_descripcion"];
- 
-        //echo "2". $listaClases[0]['clas_descripcion'] ;
-        
 
 
 
@@ -106,6 +103,7 @@ session_start();
                             <th>Horas Totales</th>
                             <th>Asistencia</th>
                             <th>Acciones</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,9 +122,15 @@ session_start();
                             <td><?php echo $key['det_asistencia'] ?> </td>
 
                             <td style="text-align:center;">
+                                <buttom class="btn btn-warning" data-toggle="modal" data-target="#EditarClase" onclick="id_clase_det(<?php echo $key['id_detalle_clases_manejo']?>)"> Editar </buttom>
+                            </td>
+
+                            <td style="text-align:center;">
                                 <a href="#"
                                 class="btn btn-danger">Eliminar</a>
                             </td>
+                            
+                            
                         </tr>
                         <?php endforeach; } else{
                             echo " "; } ?>
@@ -191,9 +195,8 @@ session_start();
 
 </section>
     <footer>
-        
         <div class="footer">
-            <a class="btn btn-info" href="Menu_dias.php"> Volver a Dias </a>
+            <a class="btn btn-info" href="../CONTROLADORES/ClasesControlador.php?op=4"> Volver a Dias </a>
             <a href="MenuPrincipal.php" class="btn btn-secondary">  Volver al Menu </a>
         </div>
     </footer>
@@ -212,6 +215,14 @@ session_start();
                 $("#clase").show();
             } 
         });
+
+//permite obtener el id de la clase  y colocarlo en el modal
+
+        function id_clase_det(id) {
+            let id_detalle = id;
+            $("#id_clase_manejo").val(id_detalle);
+        }
+
     </script>
 </body>
 </html>
