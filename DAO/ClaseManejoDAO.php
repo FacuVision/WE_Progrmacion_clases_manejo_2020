@@ -144,6 +144,9 @@ class ClaseManejoDAO{
     }
 
 
+
+
+
     public function EditarDescripcion(ClaseManejoBean $ClaseManejoBean){
         
         $descripcion = $ClaseManejoBean->getClas_descripcion();
@@ -152,7 +155,7 @@ class ClaseManejoDAO{
 
         $instanciacompartida = ConexionBD::getInstance();
         $sql = "UPDATE clases_manejo SET clas_descripcion='$descripcion' WHERE id_clase_manejo=$id_clase";
-        echo $sql;
+        //echo $sql;
         //die();
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         
@@ -168,6 +171,10 @@ class ClaseManejoDAO{
         //die();
         echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
     }
+
+
+
+
 
 
     public function evaluarHorarios($horario)
@@ -204,4 +211,85 @@ class ClaseManejoDAO{
 
         
     }
+
+
+    public function listarClaseManejoPorID($id)     
+    {
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "SELECT * FROM clases_manejo as class inner join detalle_clases_manejo as det on det.id_clase_manejo = class.id_clase_manejo WHERE class.id_clase_manejo = $id";
+        //echo $sql;
+        $res = $instanciacompartida->ejecutar($sql);
+        $lista = $instanciacompartida->obtener_filas($res);
+        $instanciacompartida->setArray(null);
+
+        return $lista;
+    }
+
+
+
+
+
+
+    public function EditarDetalleClase(DetalleClaseManejoBean $DetalleClaseManejoBean, $id_clase_antigua){
+        
+        $ClaseManejoDAO = new ClaseManejoDAO();
+        $DiaBean = new DiaBean();
+        $lista = array();
+        
+        $id_detalle = $DetalleClaseManejoBean->getId_detalle_clase_manejo();
+        $id_clase_manejo = $DetalleClaseManejoBean->getId_clase_manejo();
+        $id_coche = $DetalleClaseManejoBean->getId_coche();
+        $id_curso = $DetalleClaseManejoBean->getId_curso();
+        $id_alumno = $DetalleClaseManejoBean->getId_alumno();
+        $det_asistencia = $DetalleClaseManejoBean->getDet_asistencia();
+        $n_hora_clase = $DetalleClaseManejoBean->getDet_n_clase();
+        $horario = $DetalleClaseManejoBean->getDet_horario();
+
+
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "UPDATE detalle_clases_manejo 
+                SET  id_clase_manejo = $id_clase_manejo,id_curso= $id_curso, id_alumno = $id_alumno, id_coche= $id_coche, det_horario = '$horario',
+                det_asistencia = '$det_asistencia', det_n_clase = '$n_hora_clase' 
+                WHERE id_detalle_clases_manejo = $id_detalle";
+
+
+            if($id_clase_manejo != $id_clase_antigua){ //si es que deseamos cambiar de profesor, es decir de clase
+                $listaClasesExterna = $this->listarClaseManejoPorID($id_clase_manejo);
+
+
+                    foreach ($listaClasesExterna as $key) {
+                        $lista[]  = $key["det_horario"];
+                    }
+                    $resultado = in_array($horario,$lista);
+
+                if($resultado == true){
+                    echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
+                    die();
+                }
+
+                
+            } else{
+
+                    foreach ($_SESSION['listaClases'] as $key) {
+                        $lista[]  = $key["det_horario"];
+                    }
+                    $resultado = in_array($horario,$lista);
+                
+                    if($resultado == true){
+                    echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
+                    die();
+                }
+            }
+            
+        $estado = $instanciacompartida->EjecutarConEstado($sql);
+        $DiaBean->setId_dia($_SESSION['id_fechas']['id_dia']);
+        $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean, $_SESSION["seleccion"]["id"]);
+        
+        echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
+
+    }
+
+               // echo '<pre>' . var_export($listaClasesExterna, true) . '</pre>';
+
+
 }

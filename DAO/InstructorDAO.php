@@ -48,6 +48,19 @@ class InstructorDAO{
         return $lista;
     }
     
+    public function listarClasesDelDia($id_dia){
+
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "    SELECT * FROM clases_manejo as clas 
+                    INNER join instructores as ins on ins.id_instructor = clas.id_instructor
+                    inner join empleados as emp on emp.id_empleado = ins.id_empleado
+                    where id_dia=$id_dia";
+        $res = $instanciacompartida->ejecutar($sql);
+        $lista = $instanciacompartida->obtener_filas($res);
+
+        $instanciacompartida->setArray(null);
+        return $lista;
+    }
 }
 
 

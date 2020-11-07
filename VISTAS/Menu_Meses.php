@@ -60,7 +60,7 @@ session_start();
                         <tr>
                             <td style="text-align:center;">
                                 <a  class="btn btn-light" 
-                                href="../CONTROLADORES/ProgramacionControlador.php?op=7&id_mes=<?php echo $indice['id_mes'];?>&nombre_mes=<?php echo $array_meses[$i];?>&numero_mes=<?php echo $indice['mes_numero']; ?>" >  
+                                href="../CONTROLADORES/ProgramacionControlador.php?op=7&id_mes=<?php echo $indice['id_mes'];?>&nombre_mes=<?php echo $array_meses[$indice['mes_numero']];?>&numero_mes=<?php echo $indice['mes_numero']; ?>" >  
                                 
                                 <?php  
                                 if($indice['mes_numero']=="11" || $indice['mes_numero']=="12" || $indice['mes_numero']=="10" ) 

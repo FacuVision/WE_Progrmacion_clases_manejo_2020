@@ -74,3 +74,24 @@ section{
     color: #669;    border-top: 1px solid transparent; }
 
 .horario tr:hover td { background: white; color: #339; }
+
+
+.rojo{
+    color:red;
+    font-weight: bold;
+}
+
+.verde{
+    color:green;
+    font-weight: bold;
+}
+
+.celeste{
+    color:rgb(55, 128, 196);
+    font-weight: bold;
+}
+
+.gris{
+    color:rgb(92, 92, 92);
+    font-weight: bold;
+}

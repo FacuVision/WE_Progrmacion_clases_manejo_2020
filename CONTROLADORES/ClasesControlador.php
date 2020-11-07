@@ -74,7 +74,7 @@ switch ($opciones) {
 
             if(isset($_REQUEST)){
                 extract($_REQUEST);
-                    echo '<pre>' . var_export($_REQUEST, true) . '</pre>';
+                    //echo '<pre>' . var_export($_REQUEST, true) . '</pre>';
                 
                 if(isset($editarComentario)){
 
@@ -187,5 +187,47 @@ switch ($opciones) {
             break;    
         }
 
+        case 7:{
+
+            
+            $ClaseManejoDAO = new ClaseManejoDAO();
+            $DiaBean = new DiaBean();
+
+            if(isset($_REQUEST)){
+                extract($_REQUEST);
+            }
+            //echo '<pre>' . var_export($_REQUEST, true) . '</pre>';
+
+            /*
+                'op' => '7',
+                'id_clase_manejo' => '1',
+                'curso' => '1',
+                'coche' => '1',
+                'alumno' => '1',
+                'horario' => '1. 8am-9am',
+                'n_hora_clase' => '1',
+                'asistencia' => 'Asistio',
+                'clase_manejo' => '5',
+             */
+
+            $DetalleClaseManejoBean = new DetalleClaseManejoBean();
+            $DetalleClaseManejoBean->setId_detalle_clase_manejo($id_Detalleclase_manejo);
+            $DetalleClaseManejoBean->setId_coche($coche);
+            $DetalleClaseManejoBean->setId_curso($curso);
+            $DetalleClaseManejoBean->setId_clase_manejo($id_clase_manejo);
+            $DetalleClaseManejoBean->setId_alumno($alumno);
+            $DetalleClaseManejoBean->setDet_asistencia($asistencia);
+            $DetalleClaseManejoBean->setDet_n_clase($n_hora_clase);
+            $DetalleClaseManejoBean->setDet_horario($horario);
+
+            
+            $ClaseManejoDAO->EditarDetalleClase($DetalleClaseManejoBean, $id_clase_antigua);
+
+
+            
+            //echo '<script> document.location.href="../VISTAS/Menu_dias.php";</script>';
+            
+            break;    
         }
+}
     

@@ -269,6 +269,7 @@ switch ($opciones) {
                 $ClaseManejoDAO->CalcularHorarios();
 
                 $_SESSION['TodoInstructor'] = $InstructoresDAO->listarInstructores();
+                $_SESSION['listaClasesManejoPorDia'] = $InstructoresDAO->listarClasesDelDia($_SESSION['id_fechas']['id_dia']);
 
         echo '<script>document.location.href="../VISTAS/Menu_Clases.php";</script>';
         break;

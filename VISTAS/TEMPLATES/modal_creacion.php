@@ -368,9 +368,11 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
 
 
+
+
 <!-- AQUI PODREMOS EDITAR UNA CLASE EN ESPECIFICO-->
 
-<form method="post" action="../CONTROLADORES/ClasesControlador.php?op=3">
+<form method="post" action="../CONTROLADORES/ClasesControlador.php?op=7">
 <!-- Modal -->
 <div id="EditarClase" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -399,6 +401,16 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
 
             <div class="modal-body">
                 <div class="form-group">
+
+                    <label for="recipient-name" class="col-form-label">Elegir Instructor </label>
+                    <div class="form-group">
+                    <select class="form-control"  name="id_clase_manejo">
+                            <?php foreach ($listaClasesManejoPorDia as $key ) {?>
+                                <option  value="<?php echo $key['id_clase_manejo']?>"> <?php echo $key['emp_nombre']." ". $key['emp_apellido'];?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
                     <label for="recipient-name" class="col-form-label">Editar Curso </label>
                     <div class="form-group">
                     <select class="form-control"  name="curso">
@@ -468,7 +480,8 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
                         </select>
                     </div>
 
-                    <input type="hidden" id="id_clase_manejo" name="clase_manejo">
+                    <input type="hidden" id="detalle" name="id_Detalleclase_manejo">
+                    <input type="hidden" id="clase_antigua" name="id_clase_antigua">
 
                     </div>
                         <div class="modal-footer">

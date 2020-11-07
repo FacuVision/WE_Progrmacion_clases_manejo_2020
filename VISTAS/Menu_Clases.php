@@ -16,7 +16,12 @@ session_start();
         if(isset($_SESSION["clase_manejo"])){
             $clase_manejo = $_SESSION["clase_manejo"];
         }
-        
+
+        if(isset($_SESSION['listaClasesManejoPorDia'])){
+            $listaClasesManejoPorDia = $_SESSION['listaClasesManejoPorDia'];
+            //echo '<pre>' . var_export($listaClasesManejoPorDia, true) . '</pre>';
+
+        }
         $TodoInstructor = $_SESSION['TodoInstructor'];
 
         $nombre_mes = $_SESSION['fechas']["mes_nombre"];
@@ -47,7 +52,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Dias</title>
     <?php include('../VISTAS/TEMPLATES/ImportacionesCabecera.php'); ?>
-    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilo_clase.css">
+    <link rel="stylesheet" href="../LIBRERIAS/CSS/estilo_clases.css">
 
 </head>
 
@@ -119,10 +124,22 @@ session_start();
                             <td><?php echo $key['det_n_clase'] ?> </td>
                             <td><?php echo $key['coche_tipo'] ?> </td>
                             <td><?php echo $key['cur_horas'] ?> </td>
-                            <td><?php echo $key['det_asistencia'] ?> </td>
+                            <td>
+                                <?php if($key['det_asistencia']=="Asistio")
+                                    echo "<span class='verde'>" . $key['det_asistencia']. "</span>";
+                                else if ($key['det_asistencia']=="Programado")
+                                    echo "<span class='celeste'>" . $key['det_asistencia']. "</span>";
+                                else if ($key['det_asistencia']=="Tardanza")
+                                    echo "<span class='rojo'>" . $key['det_asistencia']. "</span>";
+                                else if ($key['det_asistencia']=="Falta")
+                                    echo "<span class='gris'>" . $key['det_asistencia']. "</span>";
+                                    
+                                ?> 
+                            
+                            </td>
 
                             <td style="text-align:center;">
-                                <buttom class="btn btn-warning" data-toggle="modal" data-target="#EditarClase" onclick="id_clase_det(<?php echo $key['id_detalle_clases_manejo']?>)"> Editar </buttom>
+                                <buttom class="btn btn-warning" data-toggle="modal" data-target="#EditarClase" onclick="obtener_id(<?php echo $key['id_detalle_clases_manejo'];?> , <?php echo $key['id_clase_manejo'];?>)"> Editar </buttom>
                             </td>
 
                             <td style="text-align:center;">
@@ -218,11 +235,19 @@ session_start();
 
 //permite obtener el id de la clase  y colocarlo en el modal
 
-        function id_clase_det(id) {
-            let id_detalle = id;
-            $("#id_clase_manejo").val(id_detalle);
+        function obtener_id(id_detalle, id_clase) {
+            let id_detalle_env = id_detalle;
+            let id_clase_env = id_clase;
+            
+            $("#detalle").val(id_detalle_env);
+            $("#clase_antigua").val(id_clase_env);
         }
 
+
+
+
+
     </script>
+    
 </body>
 </html>
