@@ -7,6 +7,7 @@ require_once('../DAO/AgnoDAO.php');
 require_once('../DAO/MesDAO.php');
 require_once('../DAO/DiaDAO.php');
 require_once('../DAO/ClaseManejoDAO.php');
+require_once('../DAO/InstructorDAO.php');
 
 require_once('../BEAN/ClaseManejoBean.php');
 require_once('../BEAN/AgnoBean.php');
@@ -152,6 +153,7 @@ switch ($opciones) {
 
                 $MesBean->setMes_numero($_REQUEST['meses_nombre_numero']);
                 $MesBean->setId_año($_SESSION['id_fechas']["id_agno"]);
+                
                 $estado = $MesDAO->insertar_mes($MesBean);
 
                 echo '<script> document.location.href="ProgramacionControlador.php?op=4&validacion=1";</script>';
@@ -205,6 +207,7 @@ switch ($opciones) {
         $DiaDAO = new DiaDAO();
 
         $DiaBean->setId_dia($_REQUEST['id_dia']);
+        
         $estado = $DiaDAO->eliminar_dia($DiaBean);
 
         echo '<script> document.location.href="ProgramacionControlador.php?op=7&validacion=1";</script>';
@@ -214,26 +217,57 @@ switch ($opciones) {
     }
 
 
-    case 11:{
+    case 11:{ //ESTA ZONA ES PARA LISTAR LAS PROGRAMACIONES DE CLASES SEGUN EL DIA QUE SE SELECCIONÓ
             
-        //ESTA ZONA ES PARA LISTAR LAS PROGRAMACIONES DE CLASES SEGUN EL DIA QUE SE SELECCIONÓ
+        $eleccion = 0; //nos dice no hemos usado el <select>
         
-        $DiaBean = new DiaBean();
+        $DiaBean = new DiaBean();   //creamos los objetos para las consultas
         $ClaseManejoDAO = new ClaseManejoDAO();
+        $InstructoresDAO = new InstructorDAO();
 
-        $_SESSION['id_fechas']["id_dia"] = $_REQUEST['id_dia'];
-        $_SESSION['fechas']["dia"]= $_REQUEST['numero_dia'];
+            if (isset($_REQUEST['sel_instructor'])){    //significa que usamos el <select>  
+                $eleccion = 1; 
+            }
+            if($eleccion==0){   //significa que no usamos el <select> y venimos redireccionados del manu de dias.php
+                $_SESSION['id_fechas']["id_dia"] = $_REQUEST['id_dia'];
+                $_SESSION['fechas']["dia"]= $_REQUEST['numero_dia'];
+            }
 
         $DiaBean->setId_dia($_SESSION['id_fechas']["id_dia"]);
-
-        $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean);
-
-        echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
         
-        //echo '<pre>' . var_export($_SESSION['fechas'], true) . '</pre>';
-        //echo '<pre>' . var_export($_SESSION['id_fechas'], true) . '</pre>';
+                $_SESSION['listaInstructores'] = $InstructoresDAO->listarInstructoresConClase($_SESSION['id_fechas']["id_dia"]);
 
-    break;
+        if($eleccion == 1){
+                    
+            $nombre_id = explode("-", $_REQUEST['sel_instructor']);     //separamos los guiones 
+            $listaInstructor = array("id"=>0, "nombre"=>"instructor");  //array de datos de instructor
 
+            //llemanos array para mas tarde
+            $listaInstructor["id"] = $nombre_id[0];
+            $listaInstructor["nombre"] = $nombre_id[1];
+
+            //llenamos la sesion
+            $_SESSION["seleccion"] =  $listaInstructor;
+            $primerInstructor = $listaInstructor["id"]; //id
+
+            //obtenemos datos de la clase de manejo
+            $_SESSION["clase_manejo"]= $ClaseManejoDAO->listarClaseManejo($_SESSION['id_fechas']['id_dia'],$primerInstructor);
+        
+        }else{
+
+            $primerInstructor = $_SESSION['listaInstructores'][0]['id_instructor']; //obtenemos el primer instructor
+            $_SESSION["seleccion"]["id"] =  $primerInstructor;
+            $_SESSION["seleccion"]["nombre"] = $_SESSION['listaInstructores'][0]['emp_nombre'];
+        }
+
+                $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean,$primerInstructor);
+    
+                $ClaseManejoDAO->CalcularHorarios();
+
+                $_SESSION['TodoInstructor'] = $InstructoresDAO->listarInstructores();
+                $_SESSION['listaClasesManejoPorDia'] = $InstructoresDAO->listarClasesDelDia($_SESSION['id_fechas']['id_dia']);
+
+            echo '<script>document.location.href="../VISTAS/Menu_Clases.php";</script>';
+        break;
     }
 }

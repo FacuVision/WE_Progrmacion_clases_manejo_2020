@@ -5,7 +5,8 @@ class ClaseManejoBean{
     private $id_clase_manejo;
     private $id_dia;
     private $id_instructor;
-    private  $clas_descripcion;
+	private $clas_descripcion;
+	private $clas_fecha;
 
 	public function getId_clase_manejo(){
 		return $this->id_clase_manejo;
@@ -38,6 +39,16 @@ class ClaseManejoBean{
 	public function setClas_descripcion($clas_descripcion){
 		$this->clas_descripcion = $clas_descripcion;
 	}
+
+	
+	public function getClas_fecha(){
+		return $this->clas_fecha;
+	}
+
+	public function setClas_fecha($clas_fecha){
+		$this->clas_fecha = $clas_fecha;
+	}
+
 
 }
 

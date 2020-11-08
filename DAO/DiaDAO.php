@@ -29,8 +29,8 @@ class DiaDAO{
         $id_mes = $MesBean->getId_mes();
 
         $instanciacompartida = ConexionBD::getInstance();
-        $sql = "INSERT INTO dias(id_mes, dia_numero) 
-                VALUES ($id_mes,'$dia_numero')";
+        $sql = "INSERT INTO dias(id_mes, dia_numero, dia_estado) 
+                VALUES ($id_mes,'$dia_numero', 'Sin datos')";
         //echo $sql;        
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         return $estado;
@@ -45,6 +45,18 @@ class DiaDAO{
         $sql = "DELETE FROM dias WHERE id_dia=$id_dia";
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         //echo $sql;
+        return $estado;
+        
+    }
+
+    public function editarEstado(DiaBean $DiaBean)
+    {
+        $dia_estado = $DiaBean->getdia_estado();
+        $id_dia = $DiaBean->getId_dia();
+
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "UPDATE dias SET dia_estado='$dia_estado' WHERE id_dia=$id_dia";
+        $estado = $instanciacompartida->EjecutarConEstado($sql);
         return $estado;
         
     }

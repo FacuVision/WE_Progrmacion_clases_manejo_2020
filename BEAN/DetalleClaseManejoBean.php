@@ -1,6 +1,6 @@
 <?php 
 
-class DetalleClaseManejo{
+class DetalleClaseManejoBean{
 
     private $id_detalle_clase_manejo;
     private $id_clase_manejo;
