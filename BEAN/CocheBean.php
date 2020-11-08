@@ -3,11 +3,11 @@
 
 class CocheBean{
 
-    private $id_coche;
-    private $coche_modelo;
-    private $coche_tipo;
-    private  $coche_placa;
-    private  $coche_marca;
+    public $id_coche;
+    public $coche_modelo;
+    public $coche_tipo;
+    public  $coche_placa;
+    public  $coche_marca;
 
 	public function getId_coche(){
 		return $this->id_coche;

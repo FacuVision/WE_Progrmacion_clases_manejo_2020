@@ -34,7 +34,7 @@ session_start();
             
         <div class="container">
                 <img src="../LIBRERIAS/images/diseno.png"  class="image">
-                <a href="../CONTROLADORES/MantenimientosControlador.php">
+                <a href="../CONTROLADORES/MantenimientosControlador.php?op=1">
                 <div class="overlay">
                     <div class="text">Mantenimientos</div>
                 </div> 

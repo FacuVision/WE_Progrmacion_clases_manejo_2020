@@ -3,13 +3,13 @@
 
 class AlumnoBean{
 
-private $id_alumno;
-private $alum_nombre;
-private $alum_aplellido;
-private $alum_telefono;
-private $alum_correo;
-private $alum_estado;  
-private $alum_estado_pago;  
+public $id_alumno;
+public $alum_nombre;
+public $alum_apellido;
+public $alum_telefono;
+public $alum_correo;
+public $alum_estado_pago;  
+public $alum_estado;  
 
 
 public function getId_alumno(){
@@ -32,8 +32,8 @@ public function getAlum_aplellido(){
     return $this->alum_aplellido;
 }
 
-public function setAlum_aplellido($alum_aplellido){
-    $this->alum_aplellido = $alum_aplellido;
+public function setAlum_apellido($alum_apellido){
+    $this->alum_apellido = $alum_apellido;
 }
 
 public function getAlum_telefono(){

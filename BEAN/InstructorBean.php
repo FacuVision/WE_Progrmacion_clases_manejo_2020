@@ -3,14 +3,23 @@
 
 class InstructorBean{
 
-    private $id_instructor;
+	private $id_instructor;
+    private $id_empleado;	
     private $ins_nombre;
     private $ins_apellido;
     private $ins_telefono;
     private $ins_correo;
     private $ins_estado;
 
-    public function getId_instructor(){
+    public function getId_empleado(){
+		return $this->id_empleado;
+	}
+
+	public function setId_empleado($id_empleado){
+		$this->id_empleado = $id_empleado;
+	}
+
+	    public function getId_instructor(){
 		return $this->id_instructor;
 	}
 

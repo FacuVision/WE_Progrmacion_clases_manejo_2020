@@ -3,10 +3,10 @@
 
 class CursoBean{
 
-    private $id_curso;
-    private $cur_nombre;
-    private $cur_horas;
-    private $cur_descripcion;
+    public $id_curso;
+    public $cur_nombre;
+    public $cur_horas;
+    public $cur_descripcion;
 
 	public function getId_curso(){
 		return $this->id_curso;
