@@ -217,24 +217,21 @@ switch ($opciones) {
     }
 
 
-    case 11:{
+    case 11:{ //ESTA ZONA ES PARA LISTAR LAS PROGRAMACIONES DE CLASES SEGUN EL DIA QUE SE SELECCIONÓ
             
-        //ESTA ZONA ES PARA LISTAR LAS PROGRAMACIONES DE CLASES SEGUN EL DIA QUE SE SELECCIONÓ
-
         $eleccion = 0; //nos dice no hemos usado el <select>
         
         $DiaBean = new DiaBean();   //creamos los objetos para las consultas
         $ClaseManejoDAO = new ClaseManejoDAO();
         $InstructoresDAO = new InstructorDAO();
 
-        if (isset($_REQUEST['sel_instructor'])){    
-            $eleccion = 1;  //significa que usamos el <select>
-        }
-
-        if($eleccion==0){   //significa que no usamos el <select> y venimos redireccionados del manu de dias.php
-            $_SESSION['id_fechas']["id_dia"] = $_REQUEST['id_dia'];
-            $_SESSION['fechas']["dia"]= $_REQUEST['numero_dia'];
-        }
+            if (isset($_REQUEST['sel_instructor'])){    //significa que usamos el <select>  
+                $eleccion = 1; 
+            }
+            if($eleccion==0){   //significa que no usamos el <select> y venimos redireccionados del manu de dias.php
+                $_SESSION['id_fechas']["id_dia"] = $_REQUEST['id_dia'];
+                $_SESSION['fechas']["dia"]= $_REQUEST['numero_dia'];
+            }
 
         $DiaBean->setId_dia($_SESSION['id_fechas']["id_dia"]);
         
@@ -254,8 +251,7 @@ switch ($opciones) {
             $primerInstructor = $listaInstructor["id"]; //id
 
             //obtenemos datos de la clase de manejo
-            
-                $_SESSION["clase_manejo"]= $ClaseManejoDAO->listarClaseManejo($_SESSION['id_fechas']['id_dia'],$primerInstructor);
+            $_SESSION["clase_manejo"]= $ClaseManejoDAO->listarClaseManejo($_SESSION['id_fechas']['id_dia'],$primerInstructor);
         
         }else{
 
@@ -265,13 +261,13 @@ switch ($opciones) {
         }
 
                 $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean,$primerInstructor);
-        
+    
                 $ClaseManejoDAO->CalcularHorarios();
 
                 $_SESSION['TodoInstructor'] = $InstructoresDAO->listarInstructores();
                 $_SESSION['listaClasesManejoPorDia'] = $InstructoresDAO->listarClasesDelDia($_SESSION['id_fechas']['id_dia']);
 
-        echo '<script>document.location.href="../VISTAS/Menu_Clases.php";</script>';
+            echo '<script>document.location.href="../VISTAS/Menu_Clases.php";</script>';
         break;
     }
 }

@@ -137,8 +137,6 @@ class ClaseManejoDAO{
         $instanciacompartida = ConexionBD::getInstance();
         $sql = "INSERT INTO clases_manejo(id_dia,id_instructor,clas_descripcion,clas_fecha) VALUES ($id_dia,$id_instructor,'$clas_descripcion', '$clas_fecha')";
         
-        //echo $sql;
-
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         return $estado;
     }
@@ -155,11 +153,8 @@ class ClaseManejoDAO{
 
         $instanciacompartida = ConexionBD::getInstance();
         $sql = "UPDATE clases_manejo SET clas_descripcion='$descripcion' WHERE id_clase_manejo=$id_clase";
-        //echo $sql;
-        //die();
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         
-
         $ClaseManejoDAO = new ClaseManejoDAO();
         $DiaBean = new DiaBean();
 
@@ -254,42 +249,59 @@ class ClaseManejoDAO{
 
 
             if($id_clase_manejo != $id_clase_antigua){ //si es que deseamos cambiar de profesor, es decir de clase
-                $listaClasesExterna = $this->listarClaseManejoPorID($id_clase_manejo);
-
-
-                    foreach ($listaClasesExterna as $key) {
+                
+                    foreach ($this->listarClaseManejoPorID($id_clase_manejo) as $key) {
                         $lista[]  = $key["det_horario"];
                     }
-                    $resultado = in_array($horario,$lista);
+                     //busca un registro en un array
 
-                if($resultado == true){
-                    echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
+                if(in_array($horario,$lista)){
+                        echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
                     die();
                 }
-
                 
             } else{
-
                     foreach ($_SESSION['listaClases'] as $key) {
                         $lista[]  = $key["det_horario"];
                     }
-                    $resultado = in_array($horario,$lista);
-                
-                    if($resultado == true){
-                    echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
+
+                    if(in_array($horario,$lista)){
+                        echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
                     die();
                 }
             }
             
-        $estado = $instanciacompartida->EjecutarConEstado($sql);
+        $instanciacompartida->EjecutarConEstado($sql);
         $DiaBean->setId_dia($_SESSION['id_fechas']['id_dia']);
         $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean, $_SESSION["seleccion"]["id"]);
-        
+        $ClaseManejoDAO->CalcularHorarios();
+
         echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
 
     }
 
-               // echo '<pre>' . var_export($listaClasesExterna, true) . '</pre>';
+    public function eliminarClase($id){
+
+        $ClaseManejoDAO = new ClaseManejoDAO();
+        $DiaBean = new DiaBean();
+
+
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql = "DELETE FROM detalle_clases_manejo WHERE id_detalle_clases_manejo=$id";
+
+        $estado = $instanciacompartida->EjecutarConEstado($sql);
+        
+        $DiaBean->setId_dia($_SESSION['id_fechas']['id_dia']);
+        $_SESSION['listaClases'] = $ClaseManejoDAO->listarClases($DiaBean, $_SESSION["seleccion"]["id"]);
+
+        $ClaseManejoDAO->CalcularHorarios();
+        echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
+        
+        return $estado;
+
+    }
+
+               // echo '<pre>' . print_r($listaClasesExterna, true) . '</pre>';
 
 
 }

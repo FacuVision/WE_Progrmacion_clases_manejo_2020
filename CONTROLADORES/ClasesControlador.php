@@ -196,19 +196,7 @@ switch ($opciones) {
             if(isset($_REQUEST)){
                 extract($_REQUEST);
             }
-            //echo '<pre>' . var_export($_REQUEST, true) . '</pre>';
 
-            /*
-                'op' => '7',
-                'id_clase_manejo' => '1',
-                'curso' => '1',
-                'coche' => '1',
-                'alumno' => '1',
-                'horario' => '1. 8am-9am',
-                'n_hora_clase' => '1',
-                'asistencia' => 'Asistio',
-                'clase_manejo' => '5',
-             */
 
             $DetalleClaseManejoBean = new DetalleClaseManejoBean();
             $DetalleClaseManejoBean->setId_detalle_clase_manejo($id_Detalleclase_manejo);
@@ -221,13 +209,25 @@ switch ($opciones) {
             $DetalleClaseManejoBean->setDet_horario($horario);
 
             
-            $ClaseManejoDAO->EditarDetalleClase($DetalleClaseManejoBean, $id_clase_antigua);
-
-
-            
-            //echo '<script> document.location.href="../VISTAS/Menu_dias.php";</script>';
-            
+            $ClaseManejoDAO->EditarDetalleClase($DetalleClaseManejoBean, $id_clase_antigua);            
             break;    
+        }
+
+        case 8:{
+
+            
+            $ClaseManejoDAO = new ClaseManejoDAO();
+            $DiaBean = new DiaBean();
+
+            if(isset($_REQUEST)){
+                extract($_REQUEST);
+                /*echo('<pre>');
+                print_r($_REQUEST);
+                echo('</pre>');*/
+            }
+
+            $ClaseManejoDAO->eliminarClase($id_detalle_clase_manejo);
+            
         }
 }
     

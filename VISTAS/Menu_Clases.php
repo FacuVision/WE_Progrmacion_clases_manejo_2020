@@ -1,48 +1,5 @@
-<?php
-session_start();
 
-
-    if (!empty($_SESSION['nombre'])) 
-    {
-        $listaClases = $_SESSION['listaClases']; 
-        //echo '<pre>' . var_export($listaClases, true) . '</pre>';
-
-        if(isset($_SESSION["seleccion"])){
-            $instructorSeleccionado = $_SESSION["seleccion"];
-        }
-        
-        $listaInstructores = $_SESSION['listaInstructores'];
-    
-        if(isset($_SESSION["clase_manejo"])){
-            $clase_manejo = $_SESSION["clase_manejo"];
-        }
-
-        if(isset($_SESSION['listaClasesManejoPorDia'])){
-            $listaClasesManejoPorDia = $_SESSION['listaClasesManejoPorDia'];
-            //echo '<pre>' . var_export($listaClasesManejoPorDia, true) . '</pre>';
-
-        }
-        $TodoInstructor = $_SESSION['TodoInstructor'];
-
-        $nombre_mes = $_SESSION['fechas']["mes_nombre"];
-        $numero_mes = $_SESSION['fechas']['mes'];
-        $numero_agno = $_SESSION['fechas']["año"];
-        $numero_dia = $_SESSION['fechas']["dia"];
-
-        $listaCursos = $_SESSION['listaCursos'];
-        $listaCoches = $_SESSION['listaCoches'] ;
-        $listaAlumnos = $_SESSION['listaAlumnos'];
-
-        $listahorarios = $_SESSION['horarios'];
-        $listaPorTerminar = $_SESSION['lista_horarios'];
-
-
-
-    } else{
-        echo '<script> document.location.href="Login.php";</script>';  
-    }
-?>
-
+<?php include('../VISTAS/TEMPLATES/importacionesSesionesClases.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,16 +21,14 @@ session_start();
     </div>
     </header>
 
-    
+
+
 
     <section>
-
     <div class="dataTable">
     <div class="instructores">
-
     <form action="../CONTROLADORES/ProgramacionControlador.php" method="get">
         Selecciona instructor &nbsp;&nbsp;
-
                 <select class="form-control" style="width:5%; display:inline; margin-bottom:20px" name="sel_instructor">
                     <?php 
                     if(!empty($listaInstructores)){
@@ -81,7 +36,6 @@ session_start();
                         <option  value="<?php echo $key['id_instructor']."-".$key['emp_nombre'];?>"> <?php echo $key['emp_nombre'];?> </option>
                     <?php } } else { echo "<option> ----- </option>";} ?>
                 </select>
-
                 <input type="hidden" name="op" value="11">
                 <input class="btn btn-primary" type="submit" value="Seleccionar" name="enviar">
     </form>
@@ -137,17 +91,15 @@ session_start();
                                 ?> 
                             
                             </td>
-
+<!-- BOTON EDITAR-->
                             <td style="text-align:center;">
                                 <buttom class="btn btn-warning" data-toggle="modal" data-target="#EditarClase" onclick="obtener_id(<?php echo $key['id_detalle_clases_manejo'];?> , <?php echo $key['id_clase_manejo'];?>)"> Editar </buttom>
                             </td>
-
+<!-- BOTON ELIMINAR-->
                             <td style="text-align:center;">
-                                <a href="#"
+                                <a href="../CONTROLADORES/ClasesControlador.php?op=8&id_detalle_clase_manejo=<?php echo $key['id_detalle_clases_manejo'];?>"
                                 class="btn btn-danger">Eliminar</a>
                             </td>
-                            
-                            
                         </tr>
                         <?php endforeach; } else{
                             echo " "; } ?>
@@ -155,6 +107,9 @@ session_start();
                 </table>
             </div>
         </div>
+
+        <!-- ZONA AÑADIR NUEVA CLASE -->
+
         <div class="clases">
             <button id="clase" type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">Añadir clase</button>
         </div>
@@ -163,28 +118,31 @@ session_start();
 
 
 
+
+<!-- ZONA EDICION DE DESCRIPCIOND DE LA CLASE -->
+
 <form action="../CONTROLADORES/ClasesControlador.php?op=2" method="post">
     <div class="comentarios">  
         <div id="comentarios" class="form-group">
             <label class="coment">Comentarios</label>
             
-            <textarea name="comentario" style="width:98%" class="form-control" rows="3"> <?php 
-            if( $listaClases[0]['clas_descripcion'] == null){
-                if(isset($clase_manejo)){
-                    echo $clase_manejo[0]["clas_descripcion"];
+            <textarea name="comentario" style="width:98%" class="form-control" rows="3"><?php 
+                if( $listaClases[0]['clas_descripcion'] == null){
+                    if(isset($clase_manejo)){
+                        echo $clase_manejo[0]["clas_descripcion"];
+                    }else{
+                        echo "";
+                    }
                 }else{
-                    echo "";
+                    echo $listaClases[0]['clas_descripcion'] ;
                 }
-            }else{
-                echo $listaClases[0]['clas_descripcion'] ;
-            }
-
-            ?> </textarea>
+                ?> 
+            </textarea>
         </div>
         <div class="botones">
 
-        <input type="hidden" name="id_clase" value=" <?php 
 
+        <input type="hidden" name="id_clase" value=" <?php 
             if( $listaClases[0]['id_clase_manejo'] == null){
                 if(isset($clase_manejo)){
                     echo $clase_manejo[0]["id_clase_manejo"];
@@ -194,6 +152,7 @@ session_start();
             }
             ?> ">
         
+
         <input type="hidden" name="id_instructor" value=" <?php 
             if( $listaClases[0]['id_instructor'] == null){
                 if(isset($clase_manejo)){
@@ -206,9 +165,11 @@ session_start();
             <input type="submit" name="editarComentario" class="btn btn-warning" value="Editar Comentario"> 
             <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_programacion"> Añadir programacion </buttom>
         </div>
-    
     </div>
 </form>
+
+
+<!-- ZONA FOOTER -->
 
 </section>
     <footer>
@@ -221,33 +182,7 @@ session_start();
     <?php include('../VISTAS/TEMPLATES/ImportacionesPie.php'); ?>
     <?php include('../VISTAS/TEMPLATES/modal_creacion.php'); ?>
     <script src="../LIBRERIAS/JS/DataTable_agnos.js"></script>
-    <script>
-        $(document).ready(function () {
-            var texto = $("#ninguno").text();
-        
-            if(texto != ""){
-                $("#clase").hide(); 
-            }   
-            if(texto == ""){
-                $("#clase").show();
-            } 
-        });
-
-//permite obtener el id de la clase  y colocarlo en el modal
-
-        function obtener_id(id_detalle, id_clase) {
-            let id_detalle_env = id_detalle;
-            let id_clase_env = id_clase;
-            
-            $("#detalle").val(id_detalle_env);
-            $("#clase_antigua").val(id_clase_env);
-        }
-
-
-
-
-
-    </script>
+    <script src="../LIBRERIAS/JS/js_Clases.js"></script>
     
 </body>
 </html>
