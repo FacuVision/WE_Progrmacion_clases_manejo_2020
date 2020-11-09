@@ -34,7 +34,7 @@
     </header>   
    <nav class="navbar navbar-expand-sm  "style="background-color: whitesmoke;">
 
-         <a  class="nav nav-link btn btn-info  " href="../../../VISTAS/MenuPrincipal.php" type="submit" >Volver al Menu Principal</a>       
+         <a  class="nav nav-link btn btn-secondary  " href="../../../VISTAS/MenuPrincipal.php" type="submit" >Volver al Menu Principal</a>       
 
          <a  style="margin-left: 5px" class="nav nav-link btn btn-info  " href="../../../CONTROLADORES/MantenimientosControlador.php?op=1" type="submit" >Inicio</a>                    
         <a style="margin-left: 5px"  class="nav-link btn btn-info  " href="../../../CONTROLADORES/MantenimientosControlador.php?op=10" type="submit" > Coches</a> 

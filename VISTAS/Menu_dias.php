@@ -62,8 +62,9 @@ session_start();
                                 href="../CONTROLADORES/ProgramacionControlador.php?op=11&numero_dia=<?php echo $indice["dia_numero"];?>&id_dia=<?php echo $indice["id_dia"];?>" >  
                                 
                                 <?php  
-                                if($indice['dia_numero']>10) 
+                                if($indice['dia_numero']>=10) 
                                 {echo $indice['dia_numero'];}
+
                                 else{echo "0". $indice['dia_numero'];} 
                                 ?> 
                                 </a>

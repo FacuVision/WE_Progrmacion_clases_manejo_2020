@@ -191,7 +191,7 @@ switch ($opciones) {
                 $DiaBean->setDia_numero($dia_convertido);
                 
                 $estado = $DiaDAO->InsertarDia($DiaBean,$MesBean);
-
+                
                 echo '<script> document.location.href="ProgramacionControlador.php?op=7&validacion=1";</script>';
             } else{
                 echo '<script> document.location.href="ProgramacionControlador.php?op=7&validacion=1";</script>';

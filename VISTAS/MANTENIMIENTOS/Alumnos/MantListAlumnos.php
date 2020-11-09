@@ -52,7 +52,7 @@ $listaAlum=$_SESSION['listaAlum'];
                 
                <td>
 
-                <?php if($list['alum_estado_pago']=="Pediente")
+                <?php if($list['alum_estado_pago']=="Pendiente")
                           echo "<span class='rojo'>" . $list['alum_estado_pago']. "</span>";
                                 else if ($list['alum_estado_pago']=="Cancelado")
                                     echo "<span class='verde'>" . $list['alum_estado_pago']. "</span>";

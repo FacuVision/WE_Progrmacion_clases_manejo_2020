@@ -261,14 +261,14 @@ class ClaseManejoDAO{
                 }
                 
             } else{
-                    foreach ($_SESSION['listaClases'] as $key) {
+                    /*foreach ($_SESSION['listaClases'] as $key) {
                         $lista[]  = $key["det_horario"];
                     }
 
                     if(in_array($horario,$lista)){
                         echo '<script> document.location.href="../VISTAS/Menu_Clases.php";</script>';
                     die();
-                }
+                }*/
             }
             
         $instanciacompartida->EjecutarConEstado($sql);
