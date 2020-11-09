@@ -103,7 +103,7 @@ session_start();
      <!-- Modal para edicion de datos -->
     <form action="../../../CONTROLADORES/MantenimientosControlador.php?op=36" method="post">
         <div class="modal fade" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                    <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Actualizar coche </h5>
@@ -131,9 +131,9 @@ session_start();
                         <input type="email" name="Icorreo" id="Icorreou" class="form-control input-sm" required>
                     </div>
                     <label>Estado</label>
-                    <select name="estado" id="estadou">
-                    <option  class="form-control input-sm"    value="Habilitado">Habilitado</option>
-                    <option class="form-control input-sm"   value="Inhabilitado">Inhabilitado</option>
+                    <select name="estado" id="estadou" class="form-control">
+                    <option  class="form-control input-sm"    value="habilitado">Habilitado</option>
+                    <option class="form-control input-sm"   value="inhabilitado">Inhabilitado</option>
                     </select>
                 </div>
                     <div class="modal-footer">
@@ -175,9 +175,9 @@ session_start();
                         <input type="email" name="Icorreo" id="" class="form-control input-sm" required>
                     </div>
                     <label>Estado</label>
-                    <select name="estado"   >
-                    <option  class="form-control input-sm"    value="Habilitado">Habilitado</option>
-                    <option class="form-control input-sm"   value="Inhabilitado">Inhabilitado</option>
+                    <select name="estado"  class="form-control" >
+                    <option  class="form-control input-sm"    value="habilitado">Habilitado</option>
+                    <option class="form-control input-sm"   value="inhabilitado">Inhabilitado</option>
                     </select>
                 </div>
             

@@ -5,19 +5,27 @@ require_once '../BEAN/AlumnoBean.php';
 require_once '../BEAN/CursoBean.php'; 
 require_once '../BEAN/CocheBean.php'; 
 require_once '../BEAN/InstructorBean.php'; 
+require_once '../BEAN/administradorBean.php'; 
 require_once '../DAO/M_alumnosDAO.php';
 require_once '../DAO/M_cochesDAO.php'; 
 require_once '../DAO/M_instructorDAO.php';   
 require_once '../DAO/M_cursoDAO.php'; 
+require_once '../DAO/AdministradorDAO.php'; 
 
-$objCochesDAO= new M_cochesDAO();
+require_once '../DAO/DetalleClaseManejoDAO.php'; 
+
+
 $objCochesBean= new CocheBean();
-$objAlumnosDAO= new M_alumnosDAO();
+$objCochesDAO= new M_cochesDAO();
 $objAlumnosBean= new AlumnoBean();
+$objAlumnosDAO= new M_alumnosDAO();
 $objCursoDAO= new M_cursoDAO();
 $objCursoBean= new CursoBean();
 $objInstructorBean = new InstructorBean();
 $objInstructorDAO = new M_instructorDAO();
+$objAdminBean = new AdministradorBean();
+$objAdminDAO= new AdministradorDAO();
+$objDetalleClaseDAO= new DetalleClaseManejoDAO();
 
 
 session_start();
@@ -27,9 +35,82 @@ $op=$_REQUEST['op'];
 // include '../VISTAS/MANTENIMIENTOS/MantInicio.php';
 switch ($op){
     case 1:
-        // MENÚ DE MANTENIMIENTOS
+        // MENÚ inicio DE MANTENIMIENTOS
+         // BUSQUEDA GLOBAL
+        unset($_SESSION['listaglobal']);
+        $_SESSION['listaglobal']=$objDetalleClaseDAO->ListarDatosGlobales();
+        
         
          echo '<script> document.location.href="../VISTAS/MANTENIMIENTOS/MantInicio.php";</script>';
+        break;
+    case 2: //lISTAR ADMINISTRADORES
+        unset($_SESSION['listaAdmin']);
+        $_SESSION['listaAdmin']=$objAdminDAO->listarAdmin();
+         echo '<script> document.location.href="../VISTAS/MANTENIMIENTOS/Administrador/MantAdmin.php";</script>';
+        break;
+    case 3:
+        //insertar Admin
+        extract($_REQUEST);
+
+        
+        $objAdminBean->setAdmin_nombre($Anombre);
+        $objAdminBean->setAdmin_apellido($Aapellido);
+        $objAdminBean->setAdmin_telefono($Atelefono);
+        $objAdminBean->set_admin_correo($Acorreo);
+
+        $validate=$objAdminDAO->agregarRetornaID($objAdminBean);
+        if($validate=1 ){
+            $idemple=$_SESSION['idemple'];
+            $objAdminBean->setId_empleado($idemple);
+            $objAdminBean->set_admin_estado($estado);
+            $objAdminBean->set_admin_contra($Apass);
+            
+            $val=$objAdminDAO->agregarAdmin($objAdminBean);
+            
+ 
+            if($val=1){
+                unset($_SESSION['idemple']);
+                unset($_SESSION['listaAdmin']);
+                $_SESSION['listaAdmin']=$objAdminDAO->listarAdmin();
+                echo '<script> document.location.href="../VISTAS/MANTENIMIENTOS/Administrador/MantAdmin.php";</script>';
+            }
+        }
+
+        break;
+    case 4:
+        # code...
+        extract($_REQUEST);
+        $estadoAdmin= $objAdminDAO->eliminarAdmin($idamin);
+        $estadoEmple=$objAdminDAO->eliminarEmple($idemple);
+         
+         unset($_SESSION['listaAdmin']);
+                $_SESSION['listaAdmin']=$objAdminDAO->listarAdmin();
+                echo '<script> document.location.href="../VISTAS/MANTENIMIENTOS/Administrador/MantAdmin.php";</script>';
+
+
+
+        break;
+    case 5: //ADMINISTRADORES ACTUALIZAR
+        
+        extract($_REQUEST);
+
+        $value=$objAdminDAO->editarEmple($Anombre, $Aapellido,$Atelefono,$Acorreo,$idEmple);
+
+        
+        if($value=1){            
+            $val=$objAdminDAO->editarAdmin($idEmple,$Apass,$estado,$idAdmin);
+            if($val=1){
+                unset($_SESSION['listaAdmin']);
+                $_SESSION['listaAdmin']=$objAdminDAO->listarAdmin();
+                echo '<script> document.location.href="../VISTAS/MANTENIMIENTOS/Administrador/MantAdmin.php";</script>';
+            }
+        }
+
+        break;
+    case 6:
+       
+
+
         break;
     case 10:
         //-------------- LISTA DE COCHES----------------------------------------
@@ -41,15 +122,11 @@ switch ($op){
          echo '<script> document.location.href="../VISTAS/MANTENIMIENTOS/Coches/MantListCoches.php";</script>';
         break;
     case 11:  //REGISTRAR COCHES
-        // extract($_REQUEST);
+        extract($_REQUEST);
 
-        $modelo = $_REQUEST['modelo'];
-        $tipocoche =$_REQUEST['tipocoche'];
-        $placa=$_REQUEST['placa'];
-        $marca =$_REQUEST['marca'];
 
-// var_dump(  $modelo,  $tipocoche,    $placa,   $marca,$op  );
-// die;
+        // var_dump(  $modelo,  $tipocoche,    $placa,   $marca,$op  );
+        // die;
 
         $objCochesBean->setCoche_modelo($modelo);
         $objCochesBean->setCoche_tipo($tipocoche);
@@ -106,8 +183,7 @@ switch ($op){
          echo '<script> document.location.href="../VISTAS/MANTENIMIENTOS/Alumnos/MantListAlumnos.php";</script>';
         break;
     case 21:  //REGISTRAR ALUMNOS
-        extract($_REQUEST);
-        
+        extract($_REQUEST);        
         $objAlumnosBean->setAlum_nombre($nombre);
         $objAlumnosBean->setAlum_apellido($apellido);
         $objAlumnosBean->setAlum_telefono($telefono);
@@ -115,10 +191,7 @@ switch ($op){
         $objAlumnosBean->setAlum_estado_pago($estadopago);
         $objAlumnosBean->setAlum_estado($estado);
         $validate=$objAlumnosDAO->agregarAlumno($objAlumnosBean);
-        var_dump($_REQUEST);
-        var_dump($validate);
- 
-          
+
        if($validate=1){
            unset($_SESSION['listaAlum']);
         $_SESSION['listaAlum']=$objAlumnosDAO->listarAlumnos();

@@ -85,7 +85,7 @@ $listaCoche= $_SESSION['listaCoche'];
      <!-- Modal para edicion de datos -->
     <form action="../../../CONTROLADORES/MantenimientosControlador.php?op=12" method="post">
         <div class="modal fade" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                    <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Actualizar coche </h5>
@@ -101,7 +101,11 @@ $listaCoche= $_SESSION['listaCoche'];
                         </div>
                         <div class="form-group">   
                             <label>Tipo de Coche</label>
-                            <input type="text" name="tipo" id="tipococheu" class="form-control input-sm"required>
+                         <select name="tipo" id="tipococheu" class="form-control" >
+                          <option  class="form-control input-sm"    value="Automático">Automático</option>
+                          <option class="form-control input-sm"   value="Mecánico">Mecánico</option>
+
+                        </select>
                         </div> 
                         <div class="form-group">
                             <label>Placa</label>
@@ -126,7 +130,7 @@ $listaCoche= $_SESSION['listaCoche'];
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Crear año </h5>
+                <h5 class="modal-title" id="exampleModalLabel"> Añadir Coche </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -138,7 +142,11 @@ $listaCoche= $_SESSION['listaCoche'];
                         </div>
                     <div class="form-group">   
                         <label>Tipo de Coche</label>
-                        <input type="text"  name="tipocoche" class="form-control input-sm"required>
+                         <select name="tipocoche"  class="form-control" >
+                          <option  class="form-control input-sm"    value="Automático">Automático</option>
+                          <option class="form-control input-sm"   value="Mecánico">Mecánico</option>
+                         </select>
+
                     </div> 
                     <div class="form-group">
                         <label>Placa</label>

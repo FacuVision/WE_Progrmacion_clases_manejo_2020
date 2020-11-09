@@ -40,6 +40,75 @@ class AdministradorDAO {
         
         return true;
     }
+      public function listarAdmin(){
+         $instanciacompartida = ConexionBD::getInstance();
+        $sql =  "SELECT  * FROM administradores a 
+		JOIN empleados e ON (a.id_empleado=e.id_empleado)";
+
+        $res = $instanciacompartida->ejecutar($sql);
+        $lista = $instanciacompartida->obtener_filas($res);
+
+        return $lista;
+    }
+
+//Retorna ID del empleado insertado
+     public function agregarRetornaID(AdministradorBean $objAdmin){
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql="INSERT INTO empleados(emp_nombre, emp_apellido, emp_telefono, emp_correo)  
+        VALUES('".$objAdmin->getAdmin_nombre()."',
+            '".$objAdmin->getAdmin_apellido()."',
+            '".$objAdmin->getAdmin_telefono()."',
+            '".$objAdmin->get_admin_correo()."' );";        
+         $estado=$instanciacompartida->EjecutarConEstado($sql);
+         unset($_SESSION['idemple']);
+         $_SESSION['idemple']=$instanciacompartida->Ultimo_ID(); 
+
+        return $estado;      
+    }
+
+    //Inserción a la tabla Admin
+    public function agregarAdmin(AdministradorBean $objAdmin){
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql="INSERT INTO administradores(id_empleado, admin_contra, admin_estado)  
+        VALUES('".$objAdmin->getId_empleado()."',
+            '".$objAdmin->get_admin_contra()."',
+            '".$objAdmin->get_admin_estado()."');";
+        $estado= $instanciacompartida->EjecutarConEstado($sql);
+        return $estado;      
+    }
+
+    public function editarEmple($nomb,$ape,$tel,$cor,$idemple){
+            $instanciacompartida = ConexionBD::getInstance();
+            $sql = "UPDATE empleados
+                    SET emp_nombre='$nomb', emp_apellido='$ape', emp_telefono='$tel', emp_correo='$cor'
+                    WHERE id_empleado=$idemple";      
+            $estado = $instanciacompartida->ejecutar($sql); 
+             
+            return $estado;     
+        }
+
+    public function editarAdmin($idemple,$contra,$estado,$id){
+            $instanciacompartida = ConexionBD::getInstance();
+             $sql = "UPDATE administradores
+                    SET id_empleado='$idemple', admin_contra='$contra', admin_estado='$estado'
+                    WHERE id_administrador=$id;";      
+            $estado = $instanciacompartida->ejecutar($sql);       
+            return $estado;     
+        }
+
+     public function eliminarAdmin($id){
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql="DELETE FROM administradores WHERE id_administrador= $id";        
+        $estado = $instanciacompartida->EjecutarConEstado($sql);
+        return $estado;     
+    }
+     public function eliminarEmple($id){
+        $instanciacompartida = ConexionBD::getInstance();
+        $sql="DELETE FROM empleados WHERE id_empleado   = $id";        
+        $estado = $instanciacompartida->EjecutarConEstado($sql);
+
+        return $estado;     
+    }
 
 
 

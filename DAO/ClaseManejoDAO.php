@@ -111,7 +111,7 @@ class ClaseManejoDAO{
     public function listarAlumnos(){
         $instanciacompartida = ConexionBD::getInstance();
 
-        $sql = "SELECT * FROM alumnos";
+        $sql = "SELECT * FROM alumnos where alum_estado='habilitado' ";
 
         $res = $instanciacompartida->ejecutar($sql);
         $listaAlumnos = $instanciacompartida->obtener_filas($res);

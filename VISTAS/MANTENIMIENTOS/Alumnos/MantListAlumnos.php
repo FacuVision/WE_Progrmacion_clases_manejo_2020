@@ -48,8 +48,22 @@ $listaAlum=$_SESSION['listaAlum'];
 				<td><?php echo $list['alum_nombre']?></td>
 				<td><?php echo $list['alum_apellido']?></td>
 				<td><?php echo $list['alum_telefono']?></td>
-				<td><?php echo $list['alum_correo']?></td>
-               <td><?php echo $list['alum_estado_pago']?></td>
+                <td><?php echo $list['alum_correo']?></td>
+                
+               <td>
+
+                <?php if($list['alum_estado_pago']=="Pediente")
+                          echo "<span class='rojo'>" . $list['alum_estado_pago']. "</span>";
+                                else if ($list['alum_estado_pago']=="Cancelado")
+                                    echo "<span class='verde'>" . $list['alum_estado_pago']. "</span>";
+                                else if ($list['alum_estado_pago']=="Solicitado")
+                                    echo "<span class='gris'>" . $list['alum_estado_pago']. "<span>";           
+
+                   
+               ?>
+             
+            </td>
+
                <td><?php echo $list['alum_estado']?></td>  
                 <td> <button class="btn btn-warning" data-toggle="modal"   data-target="#modalEdicion"
                 onclick="llenarModalEditar(<?php echo $list['id_alumno']?>,'<?php echo $list['alum_nombre']?>','<?php echo $list['alum_apellido']?>','<?php echo $list['alum_telefono']?>','<?php echo $list['alum_correo']?>','<?php echo $list['alum_estado_pago']?>','<?php echo $list['alum_estado']?>')"
@@ -99,7 +113,7 @@ $listaAlum=$_SESSION['listaAlum'];
      <!-- Modal para edicion de datos -->
     <form action="../../../CONTROLADORES/MantenimientosControlador.php?op=22" method="post">
         <div class="modal fade" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                    <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Actualizar coche </h5>
@@ -127,13 +141,18 @@ $listaAlum=$_SESSION['listaAlum'];
                     </div>
                     <div class="form-group">
                         <label>Estado de Pago</label>
-                        <input type="text" name="estadopago" id="alumEstPagou" class="form-control input-sm"required>
+                        <select name="estadopago" id="alumEstPagou" class="form-control" >
+                          <option  class="form-control input-sm"    value="Pendiente">Pediente</option>
+                          <option class="form-control input-sm"   value="Cancelado">Cancelado</option>
+                          <option class="form-control input-sm"   value="Solicitado">Solicitado</option>
+
+                        </select>
                     </div>
                      <div class="form-group">
                       <label>Estado</label>
-                        <select name="estado" id="estadou" >
-                          <option  class="form-control input-sm"    value="Habilitado">Habilitado</option>
-                          <option class="form-control input-sm"   value="Inhabilitado">Inhabilitado</option>
+                        <select name="estado" id="estadou" class="form-control" >
+                          <option  class="form-control input-sm"    value="habilitado">Habilitado</option>
+                          <option class="form-control input-sm"   value="inhabilitado">Inhabilitado</option>
                         </select>
                     </div>
                         </div>
@@ -175,13 +194,18 @@ $listaAlum=$_SESSION['listaAlum'];
                     </div>
                     <div class="form-group">
                         <label>Estado de Pago</label>
-                        <input type="text" name="estadopago"   class="form-control input-sm"required>
+                        <select  name="estadopago" class="form-control" >
+                          <option  class="form-control input-sm"    value="Pendiente">Pediente</option>
+                          <option class="form-control input-sm"   value="Cancelado">Cancelado</option>
+                          <option class="form-control input-sm"   value="Solicitado">Solicitado</option>
+
+                        </select>
                     </div>
                      <div class="form-group">
                       <label>Estado</label>
-                        <select name="estado"   >
-                          <option  class="form-control input-sm"    value="Habilitado">Habilitado</option>
-                          <option class="form-control input-sm"   value="Inhabilitado">Inhabilitado</option>
+                        <select name="estado"  class="form-control " >
+                          <option  class="form-control input-sm"    value="habilitado">Habilitado</option>
+                          <option class="form-control input-sm"   value="inhabilitado">Inhabilitado</option>
                         </select>
                     </div>
                     </div>
