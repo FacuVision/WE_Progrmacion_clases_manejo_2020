@@ -29,7 +29,7 @@
     <div class="instructores">
     <form action="../CONTROLADORES/ProgramacionControlador.php" method="get">
         Selecciona instructor &nbsp;&nbsp;
-                <select class="form-control" style="width:5%; display:inline; margin-bottom:20px" name="sel_instructor">
+                <select class="form-control" style="width:10%; display:inline; margin-bottom:20px" name="sel_instructor">
                     <?php 
                     if(!empty($listaInstructores)){
                     foreach ($listaInstructores as $key ) {?>
@@ -162,7 +162,7 @@
                 echo $listaClases[0]['id_instructor'] ;
             } ?> ">
 
-            <input type="submit" name="editarComentario" class="btn btn-warning" value="Editar Comentario"> 
+            <input type="submit" name="editarComentario" class="btn btn-warning" value="Guardar"> 
             <buttom class="btn btn-success" data-toggle="modal" data-target="#crear_programacion"> Añadir programacion </buttom>
         </div>
     </div>
@@ -181,7 +181,7 @@
 
     <?php include('../VISTAS/TEMPLATES/ImportacionesPie.php'); ?>
     <?php include('../VISTAS/TEMPLATES/modal_creacion.php'); ?>
-    <script src="../LIBRERIAS/JS/DataTable_agnos.js"></script>
+    <script src="../LIBRERIAS/JS/DataTables_normal.js"></script>
     <script src="../LIBRERIAS/JS/js_Clases.js"></script>
     
 </body>

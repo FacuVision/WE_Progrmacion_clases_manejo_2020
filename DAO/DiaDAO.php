@@ -30,7 +30,7 @@ class DiaDAO{
 
         $instanciacompartida = ConexionBD::getInstance();
         $sql = "INSERT INTO dias(id_mes, dia_numero, dia_estado) 
-                VALUES ($id_mes,'$dia_numero', 'Sin datos')";
+                VALUES ($id_mes,'$dia_numero', 'Prog Incompleta')";
         //echo $sql;        
         $estado = $instanciacompartida->EjecutarConEstado($sql);
         return $estado;

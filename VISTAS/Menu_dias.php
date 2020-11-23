@@ -73,7 +73,7 @@ session_start();
                             <td>
                                     <?php 
                                     
-                                    if($indice["dia_estado"]=="Con Datos"){
+                                    if($indice["dia_estado"]=="Prog Completa"){
                                         echo "<strong><span style='color:green'>" . $indice["dia_estado"] ."</span></Strong>";
                                     } else{
                                         echo $indice["dia_estado"];

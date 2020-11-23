@@ -4,7 +4,7 @@ class DetalleClaseManejoDAO {
 
     public function ListarDatosGlobales() {
 
-         $instanciacompartida = ConexionBD::getInstance();
+        $instanciacompartida = ConexionBD::getInstance();
 
         $sql = "SELECT  dcm.det_horario, cm.clas_fecha ,concat_ws(' ', a.alum_nombre,  a.alum_apellido)  as alumno, c2.cur_nombre, dcm.det_n_clase,c.coche_tipo,concat_ws(' / ',dcm.det_n_clase ,c2.cur_horas)as hechas_total,dcm.det_asistencia, concat_ws(' ',e.emp_nombre ,e.emp_apellido)as Instructor, cm.clas_descripcion from empleados e 
 		join instructores i on (e.id_empleado=i.id_empleado)

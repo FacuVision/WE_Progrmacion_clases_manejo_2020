@@ -110,7 +110,7 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Crear mes </h5>
+                <h5 class="modal-title" id="exampleModalLabel"> Crear Dia </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -212,8 +212,8 @@ if(empty($indice['dia_numero'])) $dia_numero = "01";
             <input type="hidden" name="id_dia" id="id">
 
             <select class="form-control"  name="edicion_estado">
-                    <option value="Con Datos" >Con Datos </option>
-                    <option value="Sin Datos" >Sin Datos </option>
+                    <option value="Prog Completa" >Prog Completa </option>
+                    <option value="Prog Incompleta" >Prog Incompleta </option>
             </select>
         </div>
 
