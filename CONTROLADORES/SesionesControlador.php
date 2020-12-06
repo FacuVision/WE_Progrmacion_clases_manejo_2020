@@ -15,7 +15,7 @@ switch ($opciones) {
 
         $AdministradorBean->set_admin_correo($_REQUEST["correo"]);
         $AdministradorBean->set_admin_contra($_REQUEST["pass"]);
-        echo "aea";
+        
         if($AdministradorDAO->ValidarAdmin($AdministradorBean)){
             echo '<script> document.location.href="../VISTAS/MenuPrincipal.php";</script>';
         }

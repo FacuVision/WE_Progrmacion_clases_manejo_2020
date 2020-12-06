@@ -113,7 +113,7 @@ session_start();
     </form>
     <?php include('../VISTAS/TEMPLATES/ImportacionesPie.php'); ?>
     <?php include('../VISTAS/TEMPLATES/modal_creacion.php'); ?>
-    <script src="../LIBRERIAS/JS/DataTable_agnos.js"></script>
+    <script src="../LIBRERIAS/JS/DataTable_reducido.js"></script>
 
     <script>
     //permite obtener el id del dia y colocarlo en el modal
