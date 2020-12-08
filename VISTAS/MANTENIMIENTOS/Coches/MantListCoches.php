@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <?php
 session_start();  
-$listaCoche= $_SESSION['listaCoche'];
+if (!empty($_SESSION['nombre'])) 
+    {
+        
+        $listaCoche= $_SESSION['listaCoche'];
+    } else{
+        echo '<script> document.location.href="../../Login.php";</script>';  
+    }
 // include "../../LIBRERIAS/Bootstrap/css/bootstrap.css";
 ?>
 <html lang="es">

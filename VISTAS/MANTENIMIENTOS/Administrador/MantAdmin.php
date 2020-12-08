@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <?php
 session_start();  
-    $listaAdmin = $_SESSION['listaAdmin'];
+ if (!empty($_SESSION['nombre'])) 
+    {
+        
+        $listaAdmin = $_SESSION['listaAdmin'];
+    } else{
+        echo '<script> document.location.href="../../Login.php";</script>';  
+    }
     // var_dump($listaAdmin);
- 
 ?>
 <html lang="es">
 <head>

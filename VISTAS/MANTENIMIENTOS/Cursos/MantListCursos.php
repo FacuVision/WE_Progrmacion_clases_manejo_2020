@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <?php
 session_start();  
-$listacur=$_SESSION['listaCursos'];
+if (!empty($_SESSION['nombre'])) 
+{
+    $listacur=$_SESSION['listaCursos'];
+    
+    } else{
+        echo '<script> document.location.href="../../Login.php";</script>';  
+    }
  
 ?>
 <html lang="es">

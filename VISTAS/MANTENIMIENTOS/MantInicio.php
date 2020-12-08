@@ -1,6 +1,12 @@
 <?php
     session_start();
-    $listaglobal=$_SESSION['listaglobal'];
+    if (!empty($_SESSION['nombre'])) 
+    {
+        $listaglobal=$_SESSION['listaglobal'];
+        
+    } else{
+        echo '<script> document.location.href="../Login.php";</script>';  
+    }
     ?>
 <!DOCTYPE html>
 <html lang="es">

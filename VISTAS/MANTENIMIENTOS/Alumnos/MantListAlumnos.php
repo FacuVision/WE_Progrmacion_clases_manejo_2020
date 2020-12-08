@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <?php
 session_start();  
-$listaAlum=$_SESSION['listaAlum'];
+if (!empty($_SESSION['nombre'])) 
+{
+    $listaAlum=$_SESSION['listaAlum'];
+        
+    } else{
+        echo '<script> document.location.href="../../Login.php";</script>';  
+    }
 // include "../../LIBRERIAS/Bootstrap/css/bootstrap.css";
 ?>
 <html lang="es">
