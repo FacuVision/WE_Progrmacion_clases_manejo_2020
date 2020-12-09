@@ -77,7 +77,10 @@
             </thead>
             <tbody>
                 <?php
-                foreach ($listaglobal as $list):  ?>
+                    if(!empty($listaglobal)){
+                    foreach( $listaglobal as $list):   
+                ?>
+
                 <tr class=" ">
                     <td><?php echo $list['det_horario']?></td>
                     <td><?php echo $list['clas_fecha']?></td>
@@ -89,7 +92,12 @@
                     <td><?php echo $list['Instructor']?></td>
                     <td><?php echo $list['clas_descripcion']?></td>
                 </tr>
-                <?php endforeach ?>
+                <?php endforeach;
+                
+            } else{
+                echo "<p> Aun no tienes registros generales </p>";
+            }
+        ?>   
             </tbody>
         </table>
     </div>
