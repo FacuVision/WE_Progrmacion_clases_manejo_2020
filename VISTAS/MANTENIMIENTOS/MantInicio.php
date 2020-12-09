@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Principal</title>
+    <title>Prog. Clases General</title>
     <?php include('../../VISTAS/TEMPLATES/ImportacionesCabecera.php'); ?>
     <link rel="stylesheet" href="../../LIBRERIAS/CSS/estilo_clases.css">
 
@@ -57,6 +57,7 @@
 
     <h5>Lista General</h5>
     <br>
+    
     <div class="col-lg" style="padding: 0px 3%">
 
         <br>
@@ -101,8 +102,24 @@
             </tbody>
         </table>
     </div>
-    <?php include('../../VISTAS/TEMPLATES/ImportacionesPie.php'); ?>
-    <script src="../../LIBRERIAS/JS/DataTables_normal.js"></script>
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+
+        <script src="../../LIBRERIAS/reportes_recursos/jquery/jquery-3.3.1.min.js"></script>
+        <script src="../../LIBRERIAS/reportes_recursos/popper/popper.min.js"></script>
+        <script src="../../LIBRERIAS/reportes_recursos/bootstrap/js/bootstrap.min.js"></script>
+        
+        <!-- datatables JS -->
+        <script type="text/javascript" src="../../LIBRERIAS/reportes_recursos/datatables/datatables.min.js"></script>    
+        
+        <!-- para usar botones en datatables JS -->  
+        <script src="../../LIBRERIAS/reportes_recursosdatatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+        <script src="../../LIBRERIAS/reportes_recursosdatatables/JSZip-2.5.0/jszip.min.js"></script>    
+        <script src="../../LIBRERIAS/reportes_recursosdatatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+        <script src="../../LIBRERIAS/reportes_recursosdatatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+        <script src="../../LIBRERIAS/reportes_recursosdatatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+        
+        <!-- código JS propìo-->    
+        <script type="text/javascript" src="../../LIBRERIAS/reportes_recursos/main.js"></script>  
 
 </body>
 
