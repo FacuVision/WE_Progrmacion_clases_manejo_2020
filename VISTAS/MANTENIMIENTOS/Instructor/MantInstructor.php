@@ -3,10 +3,10 @@
 session_start();  
 if (!empty($_SESSION['nombre'])) 
     {
-        echo '<script> document.location.href="../../Login.php";</script>';  
         
-    } else{
         $listaInstuctores = $_SESSION['listaInstructor'];
+    } else{
+        echo '<script> document.location.href="../../Login.php";</script>';  
     }
 //var_dump( $listaInstuctores);
  

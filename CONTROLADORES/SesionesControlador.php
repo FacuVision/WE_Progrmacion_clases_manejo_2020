@@ -3,7 +3,7 @@
 $opciones = $_REQUEST["op"];
 
 require_once('../DAO/AdministradorDAO.php');
-require_once('../BEAN/AdministradorBean.php');
+require_once('../BEAN/administradorBean.php');
 
 switch ($opciones) {
 

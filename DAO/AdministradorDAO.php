@@ -2,6 +2,8 @@
 
 require_once('../BEAN/AdministradorBean.php');
 require_once('../UTILS/ConexionBD.php');
+require_once '../BEAN/administradorBean.php';
+
 
 class AdministradorDAO {
 

@@ -27,7 +27,7 @@ switch ($opciones) {
             
                 //session_start();
                 $_SESSION['lista_agnos']= $lista;
-                echo '<script> document.location.href="../VISTAS/Menu_Años.php";</script>';
+                echo '<script> document.location.href="../VISTAS/Menu_A.php";</script>';
             
             break;
 
