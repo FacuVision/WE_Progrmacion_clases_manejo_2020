@@ -58,7 +58,7 @@
                     <td><?php echo $admin['emp_apellido']?></td>
                     <td><?php echo $admin['emp_telefono']?></td>
                     <td><?php echo $admin['emp_correo']?></td>
-                    <td><?php echo $admin['admin_contra']?></td>
+                    <td><?php  echo  crypt(''.$admin['admin_contra'] .'', '$1$rasmusle$')?></td>
                     <td><?php echo $admin['admin_estado']?></td>
 
                     <td> <button class="btn btn-warning" data-toggle="modal"   data-target="#modalEdicion"

@@ -1,7 +1,6 @@
 <?php
 
-require_once('../BEAN/AdministradorBean.php');
-require_once('../UTILS/ConexionBD.php');
+require_once ('../UTILS/ConexionBD.php');
 require_once '../BEAN/administradorBean.php';
 
 
@@ -15,13 +14,13 @@ class AdministradorDAO {
         $instanciacompartida = ConexionBD::getInstance();
         $sql =  "SELECT * FROM empleados as emp 
                 INNER JOIN administradores as adm on adm.id_empleado=emp.id_empleado
-                WHERE emp.emp_correo='$correo' and  adm.admin_contra='$contra';";
+                WHERE emp.emp_correo='$correo' and  adm.admin_contra='$contra' and adm.admin_estado='Habilitado';";
 
         $res = $instanciacompartida->ejecutar($sql);
         $lista = $instanciacompartida->obtener_filas($res);
 
-        //var_export($lista);
         $verificar = mysqli_affected_rows($instanciacompartida->getLink());
+        
 
         if($verificar>0){      
             session_start();
