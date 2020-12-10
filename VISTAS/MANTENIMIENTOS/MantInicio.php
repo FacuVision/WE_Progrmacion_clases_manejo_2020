@@ -112,11 +112,11 @@
         <script type="text/javascript" src="../../LIBRERIAS/reportes_recursos/datatables/datatables.min.js"></script>    
         
         <!-- para usar botones en datatables JS -->  
-        <script src="../../LIBRERIAS/reportes_recursosdatatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
-        <script src="../../LIBRERIAS/reportes_recursosdatatables/JSZip-2.5.0/jszip.min.js"></script>    
-        <script src="../../LIBRERIAS/reportes_recursosdatatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
-        <script src="../../LIBRERIAS/reportes_recursosdatatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../LIBRERIAS/reportes_recursosdatatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+        <script src="../../LIBRERIAS/reportes_recursos/datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+        <script src="../../LIBRERIAS/reportes_recursos/datatables/JSZip-2.5.0/jszip.min.js"></script>    
+        <script src="../../LIBRERIAS/reportes_recursos/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+        <script src="../../LIBRERIAS/reportes_recursos/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+        <script src="../../LIBRERIAS/reportes_recursos/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
         
         <!-- código JS propìo-->    
         <script type="text/javascript" src="../../LIBRERIAS/reportes_recursos/main.js"></script>  

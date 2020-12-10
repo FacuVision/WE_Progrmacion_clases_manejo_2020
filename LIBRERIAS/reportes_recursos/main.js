@@ -12,19 +12,19 @@
 						buttons:[ 
 							{
 								extend:    'excelHtml5',
-								text:      '<i class="fas fa-file-excel"></i> ',
+								text:      '<img src="../../LIBRERIAS/images/excel.png" width="30px"> ',
 								titleAttr: 'Exportar a Excel',
 								className: 'btn btn-success'
 							},
 							{
 								extend:    'pdfHtml5',
-								text:      '<i class="fas fa-file-pdf"></i> ',
+								text:      '<img src="../../LIBRERIAS/images/pdf.png" width="30px"> ',
 								titleAttr: 'Exportar a PDF',
 								className: 'btn btn-danger'
 							},
 							{
 								extend:    'print',
-								text:      '<i class="fa fa-print"></i> ',
+								text:      '<img src="../../LIBRERIAS/images/impresora.png" width="30px">  ',
 								titleAttr: 'Imprimir',
 								className: 'btn btn-info'
 							},
