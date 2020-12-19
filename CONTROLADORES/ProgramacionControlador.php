@@ -174,13 +174,15 @@ switch ($opciones) {
             $lista_dias_actual = $_SESSION['lista_dias'];
             $dia_convertido = intval(substr($_REQUEST["dia"],-2,2));
 
+            
             //AQUI SE VALIDA SI NO EXISTE UN DIA CON EL MISMO NUMERO
+            if (!empty($lista_dias_actual)){
             foreach ($lista_dias_actual as $e) {
                 if($e["dia_numero"] == $dia_convertido){
                     $validacion = false;
                 }
             }
-
+            }  
 
             if($validacion){
                 $MesBean = new MesBean();
